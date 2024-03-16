@@ -1,12 +1,13 @@
 import React from "react";
+import error from '../../../assets/page-not-found.png'
+import './styles.css'
 
 export const ErrorPage:React.FC = () =>{
 
     return (
         <>
             <div>
-                <h1> OOPS!</h1>
-                <h2>Algo saiu errado!</h2>
+                <img src={error} alt="Page not found"/>
             </div>
         </>
     )
