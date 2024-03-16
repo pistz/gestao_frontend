@@ -2,10 +2,11 @@ import React from 'react';
 import { Layout, Menu } from 'antd';
 import { IMenu } from './types';
 import type { MenuProps } from 'antd';
-import {headerStyle, menuStyles, outerLayoutStyles, siderStyles} from './styles'
+import {contentStyle, footerStyle, headerStyle, innerLayoutStyle, menuStyles, outerLayoutStyles, siderStyles} from './styles'
 import { useNavigate } from 'react-router-dom';
 import { Footer, Header } from 'antd/es/layout/layout';
 import { Logout } from '../logout/Logout';
+
 
 
 const {Sider, Content} = Layout;
@@ -48,14 +49,18 @@ export const MainLayout:React.FC<IMenu> = ({listItems, children}:IMenu) => {
                         
                     />               
                 </Sider>
-                <Layout>
+                <Layout style={innerLayoutStyle}>
                     <Header style={headerStyle}>
                         <Logout />
                     </Header>
-                    <Content>
+                    <Content style={contentStyle}>
                         {children}
                     </Content>
-                    <Footer>GFreq {new Date().getFullYear()} Projeto Integrador de Computação I</Footer>
+                    <Footer style={footerStyle}>
+                        <span>Gestão de Frequência Online {new Date().getFullYear()}</span> 
+                        <span>Projeto Integrador de Computação I</span>
+                        <span>UNIVESP</span>
+                    </Footer>
                 </Layout>
             </Layout>
         </>

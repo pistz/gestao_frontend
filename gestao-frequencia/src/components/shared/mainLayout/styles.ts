@@ -1,37 +1,46 @@
 export const menuStyles:React.CSSProperties = {
-    backgroundColor: "#000",
-    border:'solid 0.1rem #000',
-    borderRadius:'0.4rem 0.4rem'
-
+    backgroundColor: "#034f",
+    minHeight:'100vh'
 }
 
 export const outerLayoutStyles:React.CSSProperties = {
-    backgroundColor: "#000", 
-    width:'100%',
-    height: '100%',
+    backgroundColor: "#034f",
     margin:'0 auto',
-    padding: '0',
+    padding: '0 0',
 }
 
 export const siderStyles:React.CSSProperties = {
-    backgroundColor: "#000",
-    border:'solid 0.1rem #000',
-    borderRadius:'0.25rem 0.25rem',
-    height: '100%',
-    margin:'0 0 0 0',
-
+    minHeight:'90vh'
 }
 
 export const headerStyle:React.CSSProperties = {
     position:'relative',
     display:'inline-grid',
     width:'100%',
-    height:'3rem',
-    backgroundColor: '#000',
-    alignContent:'space-between',
+    height:'3.5rem',
+    backgroundColor: '#86B6F6',
+    alignContent:'center',
     justifyContent:'end'
 }
 
 export const innerLayoutStyle:React.CSSProperties = {
-    background:'#fff'
+    background:'#fff',
+    margin:'0 auto',
+    padding:'0 0',
+    width:'100%'
+}
+
+export const contentStyle:React.CSSProperties = {
+    background:'#fff',
+    margin:'0 auto',
+    padding:'0 0',
+    width:'100%',
+    minHeight:'90vh'
+}
+
+export const footerStyle:React.CSSProperties = {
+    backgroundColor: '#fff',
+    display:'flex',
+    flexDirection:'column',
+    textAlign:'center'
 }
