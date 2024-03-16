@@ -1,5 +1,6 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
+import logo from '../../../assets/app-logo.jpeg'
 export const Login:React.FC = () =>{
 
     const navigate = useNavigate();
@@ -9,6 +10,7 @@ export const Login:React.FC = () =>{
     }
     return (
         <>
+        <div style={{display:'flex', flexDirection:'column'}}>
             <div>
                 <label>Login</label>
                 <input type="text" />
@@ -19,6 +21,8 @@ export const Login:React.FC = () =>{
             <div>
                 <input type="button" value="entrar" onClick={handleLogin}/>
             </div>
+            <img src={logo} alt="app logo" />
+        </div>   
         </>
     )
 }

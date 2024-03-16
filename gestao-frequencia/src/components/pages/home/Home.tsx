@@ -4,10 +4,10 @@ import { routes } from "../../../routes/Routes"
 
 export const Home = () =>{
     return(
-        <>
-            <SideMenu listItems={routes}>
-                <Outlet />
-            </SideMenu>
-        </>
+<>      
+        <SideMenu listItems={routes}>
+            <Outlet />
+        </SideMenu>
+</>
     )
 }

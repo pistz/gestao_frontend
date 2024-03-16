@@ -34,7 +34,7 @@ export const routes = [
         label: 'Meu Perfil',
         path: 'profile',
         element: <ErrorPage />
-    }
+    },
 ]
 
 export const RoutesReference: React.FC = () =>{

@@ -22,7 +22,7 @@ export const SideMenu:React.FC<IMenu> = ({listItems, children}:IMenu) => {
     const handleRedirect = (pages:MenuProps['items'], key:string) =>{
         if(pages){
             const index = Number(key);
-            navigate(`${pages[index]}`);
+            navigate(`${pages[index].path}`);
         }
     }
 
@@ -40,7 +40,9 @@ export const SideMenu:React.FC<IMenu> = ({listItems, children}:IMenu) => {
                         defaultSelectedKeys={['0']} 
                         items={menuItems} 
                         style={menuStyles}
-                        onClick={(e) => handleRedirect(menuItems, e.key)}
+                        onClick={(e) => 
+                            handleRedirect(listItems, e.key)
+                        }
                     />
                 </Sider>
                 <Content>
