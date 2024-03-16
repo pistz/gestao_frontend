@@ -1,10 +1,17 @@
-import { UserOutlined, UsergroupAddOutlined, PartitionOutlined, SettingOutlined, ScheduleOutlined } from '@ant-design/icons';
+import { UserOutlined, UsergroupAddOutlined, PartitionOutlined, SettingOutlined, ScheduleOutlined, HomeOutlined } from '@ant-design/icons';
 import { ErrorPage } from '../components/pages/error/Error';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Login } from '../components/pages/login/Login';
 import { Home } from '../components/pages/home/Home';
+import { Welcome } from '../components/pages/welcome/Welcome';
 
 export const routes = [
+    {
+        icon:HomeOutlined,
+        label:'Home',
+        path:'home',
+        element: <Welcome />
+    },
     {
         icon:ScheduleOutlined,
         label:'Fazer chamada',

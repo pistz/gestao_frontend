@@ -12,6 +12,7 @@ export const ErrorPage:React.FC = () =>{
             <br></br>
             <br></br>
             <br></br>
+            <p style={{fontSize:'2rem', fontWeight:'bold', alignSelf:'center', justifySelf:'center', textAlign:'center'}}>Oops, parece que algo deu errado!</p>
             <br></br>
             <br></br>
             <br></br>

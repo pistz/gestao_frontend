@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom"
-import { SideMenu } from "../../shared/menu/Menu"
+import { MainLayout } from "../../shared/mainLayout/MainLayout"
 import { routes } from "../../../routes/Routes"
 
-export const Home = () =>{
+export const Home:React.FC = () =>{
     return(
 <>      
-        <SideMenu listItems={routes}>
-            <Outlet />
-        </SideMenu>
+    <MainLayout listItems={routes}>
+        <Outlet />
+    </MainLayout>
 </>
     )
 }
