@@ -63,9 +63,7 @@ export const Login:React.FC = () =>{
                 <Checkbox>Lembre-me</Checkbox>
 
             </Form.Item>
-                <a className="login-form-forgot" href="">
-                Esqueci a senha
-                </a>
+
             </Form.Item>
 
             <Form.Item style={{display:'flex', flexDirection:"row", alignItems:'center', justifyContent:'center', textAlign:'center'}}>

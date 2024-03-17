@@ -51,6 +51,7 @@ export const MainLayout:React.FC<IMenu> = ({listItems, children}:IMenu) => {
                 </Sider>
                 <Layout style={innerLayoutStyle}>
                     <Header style={headerStyle}>
+                        <p>Logado como usuário</p> {/** incluir usuário logado*/}
                         <Logout />
                     </Header>
                     <Content style={contentStyle}>
