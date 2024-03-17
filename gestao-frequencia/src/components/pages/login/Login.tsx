@@ -43,7 +43,7 @@ export const Login:React.FC = () =>{
                 rules={[{ required: true , message:'Insira o e-mail do usuário'}]}
                 style={formStyles}
             >
-            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="e-mail" type='email'/>
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" type='email'/>
             </Form.Item>
             <Form.Item
                 name="password"
