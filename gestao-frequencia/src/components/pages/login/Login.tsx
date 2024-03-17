@@ -3,7 +3,7 @@ import logo from '../../../assets/home-logo.png'
 import { formStyles, loginDivStyle, loginFormStyles, logoStyles } from "./styles";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
-import AuthContext from "../../context/authenticate";
+import AuthContext from "../../../context/authenticate";
 import {  useNavigate } from "react-router-dom";
 import { ILogin } from "./types";
 import { notifyError } from "../../shared/popMessage/PopMessage";

@@ -1,5 +1,5 @@
 
-import { AuthProvider } from './components/context/authenticate'
+import { AuthProvider } from './context/authenticate'
 import './global.css'
 import { RoutesReference } from './routes/Routes'
 

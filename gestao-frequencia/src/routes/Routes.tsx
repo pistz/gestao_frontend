@@ -1,11 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Login } from '../components/pages/login/Login';
 import { Home } from '../components/pages/home/Home';
-import { useContext } from 'react';
-import AuthContext from '../components/context/authenticate';
 import { HomeOutlined, PartitionOutlined, ScheduleOutlined, SettingOutlined, UserOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import { Welcome } from '../components/pages/welcome/Welcome';
 import { ErrorPage } from '../components/pages/error/Error';
+import { useAuth } from '../hooks/useAuth';
 
 export const routes = [
     {
@@ -48,7 +47,7 @@ export const routes = [
 
 export const RoutesReference: React.FC = () =>{
 
-    const {signed} = useContext(AuthContext);
+    const {signed} = useAuth();
 
     const ForbiddenAcces:React.FC =()=>{
         return (<Navigate to='/' />)
