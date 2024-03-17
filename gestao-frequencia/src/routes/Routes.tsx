@@ -58,9 +58,11 @@ export const RoutesReference: React.FC = () =>{
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Login />} />
+                <Route path='/login' element={<Login />}/>
                 <Route path='/home' element={signed ? <Home /> : <ForbiddenAcces />}>
                     {routes.map((_,index) => <Route path={routes[index].path} element={routes[index].element} key={index} />)}
                 </Route>
+                <Route path='*' element={<Login />} />
             </Routes>
         </BrowserRouter>
     )
