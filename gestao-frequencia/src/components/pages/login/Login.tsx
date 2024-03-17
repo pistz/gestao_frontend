@@ -11,15 +11,14 @@ import { notifyError } from "../../shared/popMessage/PopMessage";
 
 export const Login:React.FC = () =>{
 
-    const {signed, setSigned} = useContext(AuthContext);
+    const {setSigned} = useContext(AuthContext);
 
     const navigate = useNavigate();
 
     const onFinish = (values:ILogin) => {
-        setSigned(true);
-        if(signed){
-            console.log('Received values of form: ', values);
-        }
+        console.log('Received values of form: ', values);
+        if(!values)
+        notifyError("Erro de login, verifique a senha");
     };
 
     return (
@@ -34,24 +33,27 @@ export const Login:React.FC = () =>{
             name="normal_login"
             className="login-form"
             initialValues={{ remember: true }}
-            onFinish={(e)=> onFinish(e)}
+            onFinish={(e)=> 
+                {onFinish(e)
+                console.log(e)}
+            }
             >
             <Form.Item
-                name="username"
-                rules={[{ required: true }]}
+                name="e-mail"
+                rules={[{ required: true , message:'Insira o e-mail do usuário'}]}
                 style={formStyles}
             >
-            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" type='email'/>
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="e-mail" type='email'/>
             </Form.Item>
             <Form.Item
                 name="password"
-                rules={[{ required: true }]}
-                style={formStyles}
+                rules={[{ required: true , message:"Insira a senha do usuário"}]}
             >
             <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="Password"
+                style={formStyles}
                 />
             </Form.Item>
             <Form.Item
@@ -72,7 +74,11 @@ export const Login:React.FC = () =>{
                     htmlType="submit" 
                     className="login-form-button" 
                     style={{margin:'0 1rem', height:'2rem', position:'relative'}} 
-                    onClick={()=> {signed? navigate('/home/main'): notifyError("Erro de login")}}
+                    onClick={()=> {
+                        setSigned(true);
+                        navigate('/home/main')
+                    }
+                }
                 >
                 Entrar
                 </Button>
