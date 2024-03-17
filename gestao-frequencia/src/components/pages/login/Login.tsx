@@ -68,10 +68,11 @@ export const Login:React.FC = () =>{
 
             <Form.Item style={{display:'flex', flexDirection:"row", alignItems:'center', justifyContent:'center', textAlign:'center'}}>
                 <Button 
+                    block
                     type="primary" 
                     htmlType="submit" 
                     className="login-form-button" 
-                    style={{margin:'0 1rem', height:'2rem', position:'relative'}} 
+                    style={{margin:'0 1rem', height:'2rem', position:'relative', width:'12rem'}} 
                     onClick={()=> {
                         setSigned(true);
                         navigate('/home/main')
@@ -80,7 +81,6 @@ export const Login:React.FC = () =>{
                 >
                 Entrar
                 </Button>
-                <span style={formStyles}>ou</span> <a href="">fazer cadastro</a>
             </Form.Item>
         </Form>
             </div>
