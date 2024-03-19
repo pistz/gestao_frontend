@@ -1,7 +1,7 @@
 import { message } from 'antd';
 
 
-export const notifySuccess = (msg:string) => {
+export const notifySuccess = (msg : string) => {
     message.success(msg);
 }
 

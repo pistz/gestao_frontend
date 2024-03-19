@@ -5,31 +5,34 @@ import { HomeOutlined, PartitionOutlined, ScheduleOutlined, SettingOutlined, Use
 import { Welcome } from '../components/pages/welcome/Welcome';
 import { ErrorPage } from '../components/pages/error/Error';
 import { useAuth } from '../hooks/useAuth';
+import { List } from '../components/pages/list/List';
+import { Courses } from '../components/pages/courses/Courses';
+import { Students } from '../components/pages/students/Students';
 
 export const routes = [
     {
         icon:HomeOutlined,
         label:'Home',
         path:'main',
-        element: <Welcome />
+        element: <Welcome /> || < ErrorPage />
     },
     {
         icon:ScheduleOutlined,
         label:'Fazer chamada',
         path:'list',
-        element: <ErrorPage />
+        element: <List /> || < ErrorPage />
     },
     {
         icon:PartitionOutlined,
         label:'Cadastrar Curso',
         path:'course',
-        element: <ErrorPage />
+        element: <Courses /> || < ErrorPage />
     },
     {
         icon:UsergroupAddOutlined,
         label:'Cadastrar Alunos',
         path:'students',
-        element: <ErrorPage />
+        element: <Students /> || < ErrorPage />
     },
     {
         icon:SettingOutlined,
@@ -57,11 +60,11 @@ export const RoutesReference: React.FC = () =>{
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Login />} />
+                <Route path='*' element={<Login />} />
                 <Route path='/login' element={<Login />}/>
                 <Route path='/home' element={signed ? <Home /> : <ForbiddenAcces />}>
                     {routes.map((_,index) => <Route path={routes[index].path} element={routes[index].element} key={index} />)}
                 </Route>
-                <Route path='*' element={<Login />} />
             </Routes>
         </BrowserRouter>
     )
