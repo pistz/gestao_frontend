@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import logo from '../../../assets/home-logo.png'
-import { formStyles, loginDivStyle, loginFormStyles, logoStyles } from "./styles";
+import { buttonsFormStyles, buttonStyles, formStyles, imgStyles, loginDivStyle, loginFormStyles, logoStyles } from "./styles";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import AuthContext from "../../../context/authenticate";
@@ -25,7 +25,7 @@ export const Login:React.FC = () =>{
     <>
         <div style={loginDivStyle}>
             <div style={logoStyles}>
-                <img src={logo} alt="app logo" />
+                <img style={imgStyles}src={logo} alt="app logo" />
             </div>  
             <br></br>
             <div style={loginFormStyles}>
@@ -41,9 +41,11 @@ export const Login:React.FC = () =>{
             <Form.Item
                 name="e-mail"
                 rules={[{ required: true , message:'Insira o e-mail do usuário'}]}
-                style={formStyles}
             >
-            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" type='email'/>
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} 
+                placeholder="E-mail" 
+                type='email'
+                style={formStyles}/>
             </Form.Item>
             <Form.Item
                 name="password"
@@ -66,13 +68,13 @@ export const Login:React.FC = () =>{
 
             </Form.Item>
 
-            <Form.Item style={{display:'flex', flexDirection:"row", alignItems:'center', justifyContent:'center', textAlign:'center'}}>
+            <Form.Item style={buttonsFormStyles}>
                 <Button 
                     block
                     type="primary" 
                     htmlType="submit" 
                     className="login-form-button" 
-                    style={{margin:'0 1rem', height:'2rem', position:'relative', width:'12rem'}} 
+                    style={buttonStyles} 
                     onClick={()=> {
                         setSigned(true);
                         navigate('/home/main')

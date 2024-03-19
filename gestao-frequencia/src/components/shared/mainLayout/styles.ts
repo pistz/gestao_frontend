@@ -1,16 +1,16 @@
 export const menuStyles:React.CSSProperties = {
-    backgroundColor: "#034f",
+    backgroundColor: "#001529",
     minHeight:'100vh'
 }
 
 export const outerLayoutStyles:React.CSSProperties = {
-    backgroundColor: "#034f",
+    backgroundColor: "#001529",
     margin:'0 auto',
     padding: '0 0',
 }
 
 export const siderStyles:React.CSSProperties = {
-    minHeight:'90vh'
+    minHeight:'70vh'
 }
 
 export const headerStyle:React.CSSProperties = {
@@ -21,7 +21,8 @@ export const headerStyle:React.CSSProperties = {
     backgroundColor: '#86B6F6',
     alignContent:'center',
     justifyContent:'end',
-    alignItems:'center'
+    alignItems:'baseline',
+    padding:'0.5rem 0 0 0'
 }
 
 export const innerLayoutStyle:React.CSSProperties = {

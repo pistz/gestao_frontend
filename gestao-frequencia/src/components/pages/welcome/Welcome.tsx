@@ -1,14 +1,14 @@
 import React from 'react'
 import welcome from '../../../assets/home-logo.png'
-import './styles.css'
+import { imgStyle, innerDivStyle, mainDivStyle } from './styles.ts'
 
 export const Welcome:React.FC = () =>{
 
     return (
         <>
-        <div style={{display: 'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', margin:'0 auto'}}>
-            <div>
-                <img src={welcome} alt="welcome"/>
+        <div style={mainDivStyle}>
+            <div style={innerDivStyle}>
+                <img style={imgStyle} src={welcome} alt="welcome"/>
             </div>
             <br></br>
             <br></br>
