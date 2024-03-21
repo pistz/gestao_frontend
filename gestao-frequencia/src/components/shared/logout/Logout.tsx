@@ -11,7 +11,7 @@ export const Logout:React.FC = () => {
 
     const handleLogout = () =>{
         setSigned(false);
-        localStorage.clear();
+        sessionStorage.clear();
     }
 
     return (

@@ -2,7 +2,7 @@ import React, { useEffect} from "react"
 import logo from '../../../assets/home-logo.png'
 import { buttonsFormStyles, buttonStyles, formStyles, imgStyles, loginDivStyle, loginFormStyles, logoStyles } from "./styles";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { ILogin } from "./types";
 import { notifyError } from "../../shared/popMessage/PopMessage";
 import { useAuth } from "../../../hooks/useAuth";
@@ -20,18 +20,21 @@ export const Login:React.FC = () =>{
         //TODO - fazer lógica de login correta
         await validateLogin.validateUser(values)
         .then((e)=>{
-            e !== true? notifyError("Erro de login, usuário ou senha incorretos"):
+            if(!e){
+                notifyError("Usuário ou senha incorretos");
+            }
             setUserEmail(values.username);
             setUserPassword(values.password);
             setSigned(true);
-            localStorage.setItem('user', values.username);
-            localStorage.setItem('pass', values.password);
+            sessionStorage.setItem('user', values.username);
+            sessionStorage.setItem('pass', values.password);
         })
     };
 
     useEffect(()=>{
-        const findUser = localStorage.getItem('user');
-        const findPass = localStorage.getItem('pass');
+
+        const findUser = sessionStorage.getItem('user');
+        const findPass = sessionStorage.getItem('pass');
         if(findUser && findPass){
             const userData = {username:findUser, password:findPass};
             const handleLogin = async ()=>{
@@ -41,12 +44,12 @@ export const Login:React.FC = () =>{
                     setUserPassword(findPass);
                     setSigned(true);
                     navigate('/home/main');
+                }else{
+                    sessionStorage.clear();
                 }
             }
             handleLogin();
         }
-        if(!localStorage)
-        navigate('/login');
     });
 
     return (
@@ -82,15 +85,6 @@ export const Login:React.FC = () =>{
                 placeholder="Password"
                 style={formStyles}
                 />
-            </Form.Item>
-            <Form.Item
-                style={formStyles}
-            >
-                <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Lembre-me</Checkbox>
-
-            </Form.Item>
-
             </Form.Item>
 
             <Form.Item style={buttonsFormStyles}>
