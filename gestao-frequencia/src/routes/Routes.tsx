@@ -14,25 +14,25 @@ export const routes = [
         icon:HomeOutlined,
         label:'Home',
         path:'main',
-        element: <Welcome /> || < ErrorPage />
+        element: <Welcome /> ?? < ErrorPage />
     },
     {
         icon:ScheduleOutlined,
         label:'Fazer chamada',
         path:'list',
-        element: <List /> || < ErrorPage />
+        element: <List /> ?? < ErrorPage />
     },
     {
         icon:PartitionOutlined,
         label:'Cadastrar Curso',
         path:'course',
-        element: <Courses /> || < ErrorPage />
+        element: <Courses /> ?? < ErrorPage />
     },
     {
         icon:UsergroupAddOutlined,
         label:'Cadastrar Alunos',
         path:'students',
-        element: <Students /> || < ErrorPage />
+        element: <Students /> ?? < ErrorPage />
     },
     {
         icon:SettingOutlined,
@@ -47,6 +47,7 @@ export const routes = [
         element: <ErrorPage />
     },
 ]
+
 
 export const RoutesReference: React.FC = () =>{
 

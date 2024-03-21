@@ -1,25 +1,53 @@
-import React, { useContext } from "react"
+import React, { useEffect} from "react"
 import logo from '../../../assets/home-logo.png'
 import { buttonsFormStyles, buttonStyles, formStyles, imgStyles, loginDivStyle, loginFormStyles, logoStyles } from "./styles";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
-import AuthContext from "../../../context/authenticate";
-import {  useNavigate } from "react-router-dom";
 import { ILogin } from "./types";
 import { notifyError } from "../../shared/popMessage/PopMessage";
+import { useAuth } from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { LoginRepository } from "../../../repository/LoginRepository";
 
+const validateLogin = new LoginRepository();
 
 export const Login:React.FC = () =>{
 
-    const {setSigned} = useContext(AuthContext);
-
+    const {setSigned, setUserEmail, setUserPassword} = useAuth();
     const navigate = useNavigate();
 
-    const onFinish = (values:ILogin) => {
-        console.log('Received values of form: ', values);
-        if(!values)
-        notifyError("Erro de login, verifique a senha");
+    const onFinish = async (values:ILogin) => {
+        //TODO - fazer lógica de login correta
+        await validateLogin.validateUser(values)
+        .then((e)=>{
+            e !== true? notifyError("Erro de login, usuário ou senha incorretos"):
+            setUserEmail(values.username);
+            setUserPassword(values.password);
+            setSigned(true);
+            localStorage.setItem('user', values.username);
+            localStorage.setItem('pass', values.password);
+        })
     };
+
+    useEffect(()=>{
+        const findUser = localStorage.getItem('user');
+        const findPass = localStorage.getItem('pass');
+        if(findUser && findPass){
+            const userData = {username:findUser, password:findPass};
+            const handleLogin = async ()=>{
+                const user = await validateLogin.validateUser(userData);
+                if(user){
+                    setUserEmail(findUser);
+                    setUserPassword(findPass);
+                    setSigned(true);
+                    navigate('/home/main');
+                }
+            }
+            handleLogin();
+        }
+        if(!localStorage)
+        navigate('/login');
+    });
 
     return (
     <>
@@ -33,13 +61,10 @@ export const Login:React.FC = () =>{
             name="normal_login"
             className="login-form"
             initialValues={{ remember: true }}
-            onFinish={(e)=> 
-                {onFinish(e)
-                console.log(e)}
-            }
+            onFinish={(e) => onFinish(e)}
             >
             <Form.Item
-                name="e-mail"
+                name="username"
                 rules={[{ required: true , message:'Insira o e-mail do usuário'}]}
             >
             <Input prefix={<UserOutlined className="site-form-item-icon" />} 
@@ -74,12 +99,7 @@ export const Login:React.FC = () =>{
                     type="primary" 
                     htmlType="submit" 
                     className="login-form-button" 
-                    style={buttonStyles} 
-                    onClick={()=> {
-                        setSigned(true);
-                        navigate('/home/main')
-                    }
-                }
+                    style={buttonStyles}
                 >
                 Entrar
                 </Button>
