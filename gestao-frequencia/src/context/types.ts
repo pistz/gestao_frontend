@@ -9,9 +9,11 @@ export interface AuthContextData {
     userEmail:string;
     userRole:string;
     userPassword:string;
+    userToken:string;
 
     setUserEmail:Dispatch<SetStateAction<string>>;
     setSigned: Dispatch<SetStateAction<boolean>>;
     setUserRole:Dispatch<SetStateAction<string>>;
     setUserPassword:Dispatch<SetStateAction<string>>;
+    setUserToken:Dispatch<SetStateAction<string>>;
 }

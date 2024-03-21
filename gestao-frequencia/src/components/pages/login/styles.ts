@@ -31,7 +31,8 @@ export const loginFormStyles:React.CSSProperties = {
 export const formStyles:React.CSSProperties = {
     padding:'0 1rem',
     height:'2rem',
-    width:'20rem'
+    width:'20rem',
+    maxWidth:'30vh'
 }
 
 export const buttonsFormStyles:React.CSSProperties = {

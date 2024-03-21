@@ -15,11 +15,11 @@ export const siderStyles:React.CSSProperties = {
 
 export const headerStyle:React.CSSProperties = {
     position:'relative',
-    display:'inline-flex',
+    display:'flex',
+    flexDirection:'row',
     width:'100%',
     height:'3.5rem',
     backgroundColor: '#86B6F6',
-    alignContent:'center',
     justifyContent:'end',
     alignItems:'baseline',
     padding:'0.5rem 0 0 0'

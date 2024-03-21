@@ -24,7 +24,7 @@ export const Login:React.FC = () =>{
                 notifyError("Usuário ou senha incorretos");
             }
             setUserEmail(values.username);
-            setUserPassword(values.password);
+            setUserPassword(values.password); // TODO - alterar para token quando backend estiver correto
             setSigned(true);
             sessionStorage.setItem('user', values.username);
             sessionStorage.setItem('pass', values.password);
@@ -41,7 +41,7 @@ export const Login:React.FC = () =>{
                 const user = await validateLogin.validateUser(userData);
                 if(user){
                     setUserEmail(findUser);
-                    setUserPassword(findPass);
+                    setUserPassword(findPass);//TODO - alterar para token quando backend estiver correto
                     setSigned(true);
                     navigate('/home/main');
                 }else{
