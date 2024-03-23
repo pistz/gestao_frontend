@@ -1,17 +1,22 @@
-interface responseMock {
-    username:string;
-    password:string;
-}
-export class LoginRepository {
+import axios from "axios";
+import Repository from "./base/Repository";
 
-    //TODO - conectar com o BD
-    validateUser = async ({username, password}:responseMock) =>{
-        const data = {
-            username:'teste@teste.com',
-            password:'teste'
+const host:string = 'http://localhost:3001/api/v1/login';
+export class LoginRepository extends Repository{
+
+    validateUser = async (email:string, pass:string) =>{
+
+        const sendBody = {
+            email: email,
+            password: pass
+        };
+
+        try {
+            const result = await axios.post(host,sendBody)
+            return result
+        } catch (error) {
+            Repository.checkError(error)
+            throw Error("error: " + error);
         }
-        if(data.username === username && data.password === password)
-
-        return true;
     }
 }

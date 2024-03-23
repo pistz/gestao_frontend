@@ -18,17 +18,19 @@ export const Login:React.FC = () =>{
 
     const onFinish = async (values:ILogin) => {
         //TODO - fazer lógica de login correta
-        await validateLogin.validateUser(values)
-        .then((e)=>{
-            if(!e){
-                notifyError("Usuário ou senha incorretos");
-            }
-            setUserEmail(values.username);
-            setUserPassword(values.password); // TODO - alterar para token quando backend estiver correto
-            setSigned(true);
-            sessionStorage.setItem('user', values.username);
-            sessionStorage.setItem('pass', values.password);
-        })
+        try {
+            await validateLogin.validateUser(values.email, values.password)
+            .then(()=>{
+                    setUserEmail(values.email)
+                    setUserPassword(values.password)
+                    setSigned(true)
+                    sessionStorage.setItem('user', values.email);
+                    sessionStorage.setItem('pass', values.password);
+            })
+        } catch (error) {
+            console.error(error)
+            notifyError("Usuário ou senha incorretos");
+        }
     };
 
     useEffect(()=>{
@@ -36,10 +38,10 @@ export const Login:React.FC = () =>{
         const findUser = sessionStorage.getItem('user');
         const findPass = sessionStorage.getItem('pass');
         if(findUser && findPass){
-            const userData = {username:findUser, password:findPass};
+            const userData = {email:findUser, password:findPass};
             const handleLogin = async ()=>{
-                const user = await validateLogin.validateUser(userData);
-                if(user){
+                const user = await validateLogin.validateUser(userData.email, userData.password);
+                if(user !== null || user !== undefined){
                     setUserEmail(findUser);
                     setUserPassword(findPass);//TODO - alterar para token quando backend estiver correto
                     setSigned(true);
@@ -64,10 +66,11 @@ export const Login:React.FC = () =>{
             name="normal_login"
             className="login-form"
             initialValues={{ remember: true }}
-            onFinish={(e) => onFinish(e)}
+            onFinish={(e) => {
+                onFinish(e)}}
             >
             <Form.Item
-                name="username"
+                name="email"
                 rules={[{ required: true , message:'Insira o e-mail do usuário'}]}
             >
             <Input prefix={<UserOutlined className="site-form-item-icon" />} 
