@@ -21,12 +21,3 @@ export const mainDivStyle:React.CSSProperties = {
     alignItems:'center',
     margin:'0 auto'
 }
-
-export const helloTextStyle:React.CSSProperties = {
-    fontSize:'1.5rem',
-    fontWeight:'bold',
-    alignSelf:'center', 
-    justifySelf:'center',
-    textAlign:'center', 
-    margin:'0.5rem'
-}

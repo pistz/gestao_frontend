@@ -6,12 +6,15 @@ import {contentStyle, footerStyle, headerStyle, innerLayoutStyle, menuStyles, ou
 import { useNavigate } from 'react-router-dom';
 import { Footer, Header } from 'antd/es/layout/layout';
 import { Logout } from '../logout/Logout';
+import { useAuth } from '../../../hooks/useAuth';
 
 
 
 const {Sider, Content} = Layout;
 
 export const MainLayout:React.FC<IMenu> = ({listItems, children}:IMenu) => {
+
+    const {userEmail} = useAuth();
 
     const menuItems:MenuProps['items'] = listItems?.map((item, index) => ({
             key: String(index),
@@ -63,6 +66,7 @@ export const MainLayout:React.FC<IMenu> = ({listItems, children}:IMenu) => {
                         <span>Gestão de Frequência Online {new Date().getFullYear()}</span> 
                         <span>Projeto Integrador de Computação I</span>
                         <span>UNIVESP</span>
+                        <p>Logado como {userEmail}</p>
                     </Footer>
                 </Layout>
             </Layout>
