@@ -5,12 +5,17 @@ import { createCourseDTO } from './types';
 import { CourseRepository } from '../../../repository/CourseRepository';
 import { notifyError, notifySuccess } from '../../shared/popMessage/PopMessage';
 import { useAuth } from '../../../hooks/useAuth';
+import { Divider } from 'antd';
 
 const createCourse = new CourseRepository().createCourse;
 
 export const Courses:React.FC = () => {
 
   const {userSchoolId, schoolName} = useAuth();
+
+  const dividerText = (text:string):string => {
+    return text.toUpperCase();
+  }
 
   const initialFormData:createCourseDTO = {
     name:'',
@@ -34,22 +39,19 @@ export const Courses:React.FC = () => {
     await createCourse(formData.name, formData.startingYear, formData.schoolId)
       .then(data => {
       console.log('Course created:', data);
-      notifySuccess("Curso cadastrado");
+      notifySuccess("matéria cadastrada");
       setFormData(initialFormData);
     }).catch(error => {
-      notifyError("Erro ao cadastrar curso");
+      notifyError("Erro ao cadastrar matéria");
       console.error('Error creating course:', error);
     });
   };
-
-
-
 
   return (
     <>
       <div style={courseContainerDivStyle}>
         <header style={courseHeaderStyle}>
-          Cadastrar cursos
+          Cadastrar Matérias
         </header>
         <main style={courseMainStyle}>
           <p>Instituição de Ensino</p>
@@ -64,7 +66,7 @@ export const Courses:React.FC = () => {
             style={coursetInputStyle}
             placeholder='Nome do Curso'
           />
-          <label>Ano de início do curso</label>
+          <label>Ano de início da matéria</label>
           <input 
             type="number" 
             name="startingYear" 
@@ -77,6 +79,9 @@ export const Courses:React.FC = () => {
           <Button text = "Cadastrar"/>
 
         </form>
+        <Divider>{dividerText('matérias cadastradas')}</Divider>
+
+
 
         </main>
       </div>

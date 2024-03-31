@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Login } from '../components/pages/login/Login';
 import { Home } from '../components/pages/home/Home';
-import { HomeOutlined, PartitionOutlined, ScheduleOutlined, SettingOutlined, UserOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+import { HomeOutlined, PartitionOutlined, ScheduleOutlined, SnippetsOutlined, UserOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import { Welcome } from '../components/pages/welcome/Welcome';
 import { ErrorPage } from '../components/pages/error/Error';
 import { useAuth } from '../hooks/useAuth';
@@ -24,7 +24,7 @@ export const routes = [
     },
     {
         icon:PartitionOutlined,
-        label:'Cadastrar Curso',
+        label:'Cadastrar Matéria',
         path:'course',
         element: <Courses /> ?? < ErrorPage />
     },
@@ -35,9 +35,9 @@ export const routes = [
         element: <Students /> ?? < ErrorPage />
     },
     {
-        icon:SettingOutlined,
-        label:'Configurações',
-        path:'settings',
+        icon:SnippetsOutlined,
+        label:'Criar Listas',
+        path:'lists',
         element: <ErrorPage />
     },
     {

@@ -4,10 +4,13 @@ import { createStudentDTO } from './types';
 import { StudentRepository } from '../../../repository/StudentRepository';
 import { notifyError, notifySuccess } from '../../shared/popMessage/PopMessage';
 import { Button } from '../../shared/button/Button';
+import { useAuth } from '../../../hooks/useAuth';
 
 const createStudent = new StudentRepository().createStudent;
 
 export const Students:React.FC = () => {
+
+  const {schoolName} = useAuth();
 
   const initialFormData:createStudentDTO = {
     firstName:'',
@@ -46,6 +49,8 @@ export const Students:React.FC = () => {
         <header style={studentHeaderStyle}>
           Cadastrar alunos
         </header>
+        <p>Instituição de Ensino</p>
+        <p>{schoolName}</p>
         <main style={studentMainStyle}>
 
               <form onSubmit={handleSubmit} style={studentFormStyle}>
