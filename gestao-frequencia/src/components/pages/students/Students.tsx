@@ -1,8 +1,9 @@
 import React, { FormEvent, useState } from 'react'
-import { studentHeaderStyle, studentContainerDivStyle, studentMainStyle, studentFormStyle, studentInputStyle, studentButtonStyle } from './styles'
+import { studentHeaderStyle, studentContainerDivStyle, studentMainStyle, studentFormStyle, studentInputStyle } from './styles'
 import { createStudentDTO } from './types';
 import { StudentRepository } from '../../../repository/StudentRepository';
 import { notifyError, notifySuccess } from '../../shared/popMessage/PopMessage';
+import { Button } from '../../shared/button/Button';
 
 const createStudent = new StudentRepository().createStudent;
 
@@ -76,7 +77,7 @@ export const Students:React.FC = () => {
                     placeholder='E-mail do aluno'
                   />
 
-                  <button type="submit" style={studentButtonStyle}>Cadastrar</button>
+                  <Button text = "Cadastrar"/>
 
               </form>
 

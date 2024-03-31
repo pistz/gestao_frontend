@@ -16,6 +16,7 @@ export const studentHeaderStyle:React.CSSProperties = {
     alignSelf:'center', 
     justifySelf:'center',
     textAlign:'center', 
+    textTransform:"uppercase"
 };
 
 export const studentMainStyle:React.CSSProperties = {
@@ -41,19 +42,4 @@ export const studentInputStyle:React.CSSProperties = {
     minWidth:'30vh',
     border:'0.1rem solid #001529',
     borderRadius:'1rem 1rem'
-};
-
-export const studentButtonStyle: React.CSSProperties = {
-    backgroundColor: '#4285F4',
-    color: 'white',
-    margin:'1rem',
-    padding: '1rem 1rem',
-    border: 'none',
-    borderRadius: '0.4rem 0.4rem',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-    fontFamily: '\'Roboto\', sans-serif',
-    fontSize: '16px',
-    textTransform: 'uppercase',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s, box-shadow 0.3s'
 };

@@ -66,7 +66,8 @@ export const MainLayout:React.FC<IMenu> = ({listItems, children}:IMenu) => {
                         <span>Gestão de Frequência Online {new Date().getFullYear()}</span> 
                         <span>Projeto Integrador de Computação I</span>
                         <span>UNIVESP</span>
-                        <p>Logado como {userEmail}</p>
+                        <br />
+                        <p>Logado como <strong>{userEmail}</strong></p>
                     </Footer>
                 </Layout>
             </Layout>

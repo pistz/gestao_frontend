@@ -16,6 +16,7 @@ export const courseHeaderStyle:React.CSSProperties = {
     alignSelf:'center', 
     justifySelf:'center',
     textAlign:'center', 
+    textTransform:"uppercase"
 }
 
 export const courseMainStyle:React.CSSProperties = {
@@ -25,3 +26,20 @@ export const courseMainStyle:React.CSSProperties = {
     alignItems:'center',
     margin:'0 auto'
 }
+
+export const courseFormStyle:React.CSSProperties = {
+    position:'relative',
+    display:'flex',
+    flexDirection:'column',
+    alignItems:'center',
+    margin:'0.5rem auto'
+};
+
+export const coursetInputStyle:React.CSSProperties = {
+    position:'relative',
+    padding:'0.5rem',
+    margin:'0.5rem',
+    minWidth:'30vh',
+    border:'0.1rem solid #001529',
+    borderRadius:'1rem 1rem'
+};
