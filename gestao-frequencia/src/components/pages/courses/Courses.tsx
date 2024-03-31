@@ -4,15 +4,18 @@ import { Button } from '../../shared/button/Button'
 import { createCourseDTO } from './types';
 import { CourseRepository } from '../../../repository/CourseRepository';
 import { notifyError, notifySuccess } from '../../shared/popMessage/PopMessage';
+import { useAuth } from '../../../hooks/useAuth';
 
 const createCourse = new CourseRepository().createCourse;
 
 export const Courses:React.FC = () => {
 
+  const {userSchoolId, schoolName} = useAuth();
+
   const initialFormData:createCourseDTO = {
     name:'',
-    startingYear:2000,
-    schoolId:''
+    startingYear: new Date().getFullYear(),
+    schoolId:userSchoolId
   };
 
   const [formData, setFormData] = useState<createCourseDTO>(initialFormData);
@@ -49,6 +52,8 @@ export const Courses:React.FC = () => {
           Cadastrar cursos
         </header>
         <main style={courseMainStyle}>
+          <p>Instituição de Ensino</p>
+          <p>{schoolName}</p>
         <form onSubmit={handleSubmit} style={courseFormStyle}>
 
           <input 
@@ -59,7 +64,7 @@ export const Courses:React.FC = () => {
             style={coursetInputStyle}
             placeholder='Nome do Curso'
           />
-
+          <label>Ano de início do curso</label>
           <input 
             type="number" 
             name="startingYear" 
@@ -71,7 +76,7 @@ export const Courses:React.FC = () => {
 
           <Button text = "Cadastrar"/>
 
-</form>
+        </form>
 
         </main>
       </div>

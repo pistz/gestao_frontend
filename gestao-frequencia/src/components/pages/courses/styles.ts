@@ -41,5 +41,5 @@ export const coursetInputStyle:React.CSSProperties = {
     margin:'0.5rem',
     minWidth:'30vh',
     border:'0.1rem solid #001529',
-    borderRadius:'1rem 1rem'
+    borderRadius:'0.1rem 0.1rem'
 };

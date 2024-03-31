@@ -13,19 +13,17 @@ const validateLogin = new LoginRepository();
 
 export const Login:React.FC = () =>{
 
-    const {setSigned, setUserEmail, setUserPassword} = useAuth();
+    const {setSigned, setUserEmail, setUserSchoolId, setSchoolname} = useAuth();
     const navigate = useNavigate();
 
     const onFinish = async (values:ILogin) => {
-        //TODO - fazer lógica de login correta
+
         try {
             await validateLogin.validateUser(values.email, values.password)
-            .then(()=>{
-                    setUserEmail(values.email)
-                    setUserPassword(values.password)
+            .then((data)=>{
                     setSigned(true)
-                    sessionStorage.setItem('user', values.email);
-                    sessionStorage.setItem('pass', values.password);
+                    sessionStorage.setItem('$us', JSON.stringify(data.id));
+                    sessionStorage.setItem('$', JSON.stringify(data.school['id']));
             })
         } catch (error) {
             console.error(error)
@@ -35,16 +33,20 @@ export const Login:React.FC = () =>{
 
     useEffect(()=>{
 
-        const findUser = sessionStorage.getItem('user');
-        const findPass = sessionStorage.getItem('pass');
-        if(findUser && findPass){
-            const userData = {email:findUser, password:findPass};
+        const findUser = sessionStorage.getItem('$us');
+        const findSchool = sessionStorage.getItem('$');
+        if(findUser && findSchool){
+            const userData = JSON.parse(findUser);
+            const school = JSON.parse(findSchool);
             const handleLogin = async ()=>{
-                const user = await validateLogin.validateUser(userData.email, userData.password);
+                const user = await validateLogin.getUser(userData);
                 if(user !== null || user !== undefined){
-                    setUserEmail(findUser);
-                    setUserPassword(findPass);//TODO - alterar para token quando backend estiver correto
-                    setSigned(true);
+                    const {id} = user.school;
+                    const {schoolName} = user.school;
+                    setUserEmail(user.email);
+                    setUserSchoolId(id);
+                    setSchoolname(schoolName);
+                    setSigned(school === id);
                     navigate('/home/main');
                 }else{
                     sessionStorage.clear();
