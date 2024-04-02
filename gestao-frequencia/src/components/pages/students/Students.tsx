@@ -5,34 +5,11 @@ import { StudentRepository } from '../../../repository/StudentRepository';
 import { notifyError, notifySuccess } from '../../shared/popMessage/PopMessage';
 import { Button } from '../../shared/button/Button';
 import { useAuth } from '../../../hooks/useAuth';
-import { Divider, TableColumnsType } from 'antd';
-import { DynamicTable } from '../../shared/table/Table';
-import { IStudent } from '../../../entities/Student/Student';
+import { Divider } from 'antd';
+import { StudentTable } from './studentTable/StudentTable';
+
 
 const studentQueryKey = 'studentQueryKey';
-
-const columns:TableColumnsType<IStudent> = [
-  {
-    title:'Número de Registro',
-    dataIndex:'id',
-    key:'id'
-  },
-  {
-    title:'Nome',
-    dataIndex:'firstName',
-    key:'firstName',
-  },
-  {
-    title:'Sobrenome',
-    dataIndex:'lastName',
-    key:'lastName',
-  },
-  {
-    title:'E-mail',
-    dataIndex:'email',
-    key:'email'
-  }
-]
 
 export const Students:React.FC = () => {
 
@@ -122,12 +99,10 @@ export const Students:React.FC = () => {
 
           <Divider>{dividerText('Alunos matriculados')}</Divider>
 
-          <DynamicTable 
-            columns={columns}
+          <StudentTable 
             listQueryKey={studentQueryKey} 
             getAllEntities={studentData.getAllStudents} 
             deleteEntity={studentData.deleteStudent}
-            type='IStudent'
           />
 
         </main>
