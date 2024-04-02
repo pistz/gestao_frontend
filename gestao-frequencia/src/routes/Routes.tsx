@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Login } from '../components/pages/login/Login';
 import { Home } from '../components/pages/home/Home';
-import { HomeOutlined, PartitionOutlined, ScheduleOutlined, SnippetsOutlined, UserOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+import { FileAddOutlined, HomeOutlined, PartitionOutlined, ScheduleOutlined, SnippetsOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import { Welcome } from '../components/pages/welcome/Welcome';
 import { ErrorPage } from '../components/pages/error/Error';
 import { useAuth } from '../hooks/useAuth';
@@ -36,13 +36,13 @@ export const routes = [
     },
     {
         icon:SnippetsOutlined,
-        label:'Criar Listas',
+        label:'Criar Chamadas',
         path:'lists',
         element: <ErrorPage />
     },
     {
-        icon:UserOutlined,
-        label: 'Meu Perfil',
+        icon:FileAddOutlined,
+        label: 'Vincular',
         path: 'profile',
         element: <ErrorPage />
     },

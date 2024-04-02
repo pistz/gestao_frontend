@@ -5,10 +5,39 @@ import { StudentRepository } from '../../../repository/StudentRepository';
 import { notifyError, notifySuccess } from '../../shared/popMessage/PopMessage';
 import { Button } from '../../shared/button/Button';
 import { useAuth } from '../../../hooks/useAuth';
+import { Divider, TableColumnsType } from 'antd';
+import { DynamicTable } from '../../shared/table/Table';
+import { IStudent } from '../../../entities/Student/Student';
 
-const createStudent = new StudentRepository().createStudent;
+const studentQueryKey = 'studentQueryKey';
+
+const columns:TableColumnsType<IStudent> = [
+  {
+    title:'Número de Registro',
+    dataIndex:'id',
+    key:'id'
+  },
+  {
+    title:'Nome',
+    dataIndex:'firstName',
+    key:'firstName',
+  },
+  {
+    title:'Sobrenome',
+    dataIndex:'lastName',
+    key:'lastName',
+  },
+  {
+    title:'E-mail',
+    dataIndex:'email',
+    key:'email'
+  }
+]
 
 export const Students:React.FC = () => {
+
+  const studentData = new StudentRepository();
+
 
   const {schoolName} = useAuth();
 
@@ -31,7 +60,7 @@ export const Students:React.FC = () => {
   const handleSubmit = async (e:FormEvent) => {
     e.preventDefault();
 
-    await createStudent(formData.firstName, formData.lastName, formData.email)
+    await studentData.createStudent(formData.firstName, formData.lastName, formData.email)
       .then(data => {
       console.log('Student created:', data);
       notifySuccess("Estudante cadastrado");
@@ -43,6 +72,10 @@ export const Students:React.FC = () => {
   };
 
   
+  const dividerText = (text:string):string => {
+    return text.toUpperCase();
+  }
+
   return (
     <>
       <div style={studentContainerDivStyle}>
@@ -53,38 +86,49 @@ export const Students:React.FC = () => {
         <p>{schoolName}</p>
         <main style={studentMainStyle}>
 
-              <form onSubmit={handleSubmit} style={studentFormStyle}>
+          <form onSubmit={handleSubmit} style={studentFormStyle}>
 
-                  <input 
-                    type="text" 
-                    name="firstName" 
-                    value={formData.firstName} 
-                    onChange={handleChange} 
-                    style={studentInputStyle}
-                    placeholder='Nome do Aluno'
-                  />
+              <input 
+                type="text" 
+                name="firstName" 
+                value={formData.firstName} 
+                onChange={handleChange} 
+                style={studentInputStyle}
+                placeholder='Nome do Aluno'
+              />
 
-                  <input 
-                    type="text" 
-                    name="lastName" 
-                    value={formData.lastName} 
-                    onChange={handleChange} 
-                    style={studentInputStyle}
-                    placeholder='Sobrenome do Aluno'
-                  />
+              <input 
+                type="text" 
+                name="lastName" 
+                value={formData.lastName} 
+                onChange={handleChange} 
+                style={studentInputStyle}
+                placeholder='Sobrenome do Aluno'
+              />
 
-                  <input 
-                    type="email" 
-                    name="email" 
-                    value={formData.email} 
-                    onChange={handleChange} 
-                    style={studentInputStyle}
-                    placeholder='E-mail do aluno'
-                  />
+              <input 
+                type="email" 
+                name="email" 
+                value={formData.email} 
+                onChange={handleChange} 
+                style={studentInputStyle}
+                placeholder='E-mail do aluno'
+              />
+            <span style={{display:'inline-flex'}}>
+              <Button text = "Cadastrar" type='submit' />
+              <Button text = "Limpar" type='reset' click={()=>{setFormData(initialFormData); notifySuccess("Formulário apagado")}}/>
+            </span>
+          </form>
 
-                  <Button text = "Cadastrar"/>
+          <Divider>{dividerText('Alunos matriculados')}</Divider>
 
-              </form>
+          <DynamicTable 
+            columns={columns}
+            listQueryKey={studentQueryKey} 
+            getAllEntities={studentData.getAllStudents} 
+            deleteEntity={studentData.deleteStudent}
+            type='IStudent'
+          />
 
         </main>
       </div>

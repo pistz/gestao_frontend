@@ -64,7 +64,7 @@ export const Courses:React.FC = () => {
             value={formData.name} 
             onChange={handleChange} 
             style={coursetInputStyle}
-            placeholder='Nome do Curso'
+            placeholder='Nome da Matéria'
           />
           <label>Ano de início da matéria</label>
           <input 
@@ -73,15 +73,20 @@ export const Courses:React.FC = () => {
             value={formData.startingYear} 
             onChange={handleChange} 
             style={coursetInputStyle}
-            placeholder='Ano de inicio do curso'
+            placeholder='Ano de inicio'
           />
-
-          <Button text = "Cadastrar"/>
+        <span style={{display:'inline-flex'}}>
+          <Button text = "Cadastrar" type="submit" />
+          <Button text = "Limpar" type='reset' click={()=>{setFormData(initialFormData); notifySuccess("Formulário apagado")}}/>
+        </span>
 
         </form>
-        <Divider>{dividerText('matérias cadastradas')}</Divider>
+        <Divider>{dividerText('listagem de matérias cadastradas')}</Divider>
 
 
+        {/* //TODO inserir listagem dinâmica das matérias cadastradas 
+            // cada matéria deve abrir uma listagem dos alunos cadastrados para consulta
+        */}
 
         </main>
       </div>

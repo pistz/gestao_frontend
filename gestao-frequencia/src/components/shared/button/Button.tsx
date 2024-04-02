@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-
-interface ButtonProps {
-    text: string;
-} 
+import React, {  useState } from 'react';
+import { ButtonProps } from './types';
 
 
-export const Button: React.FC<ButtonProps> = ({text}) => {
+
+export const Button: React.FC<ButtonProps> = ({text, type, click}) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isActive, setIsActive] = useState(false);
 
@@ -22,17 +20,19 @@ export const Button: React.FC<ButtonProps> = ({text}) => {
         fontSize: '1rem',
         textTransform: 'uppercase',
         cursor: 'pointer',
+        minWidth:'8em',
         transition: 'background-color 0.3s, box-shadow 0.3s'
     };
 
     return (
         <button
-            type="submit"
+            type={type}
             style={ButtonStyle}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onMouseDown={() => setIsActive(true)}
             onMouseUp={() => setIsActive(false)}
+            onClick={click}
         >
             {text}
         </button>
