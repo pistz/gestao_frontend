@@ -1,13 +1,14 @@
 import axios from "axios";
 import Repository from "./base/Repository";
+import { endpoints } from "../routes/endpoints";
 
-const host:string = 'http://localhost:3001/api/v1/school';
+const school:string = endpoints.host+endpoints.api+endpoints.school;
 
 export class SchoolRepository extends Repository{
 
     getAllSchools = async ()=>{
         try {
-            const result = await axios.get(host);
+            const result = await axios.get(school);
             return result.data;
         } catch (error) {
             Repository.checkError(error)

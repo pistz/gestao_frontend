@@ -5,9 +5,10 @@ import { FileAddOutlined, HomeOutlined, PartitionOutlined, ScheduleOutlined, Sni
 import { Welcome } from '../components/pages/welcome/Welcome';
 import { ErrorPage } from '../components/pages/error/Error';
 import { useAuth } from '../hooks/useAuth';
-import { List } from '../components/pages/list/List';
+import { List } from '../components/pages/lists/List';
 import { Courses } from '../components/pages/courses/Courses';
 import { Students } from '../components/pages/students/Students';
+import { Enroll } from '../components/pages/enroll/Enroll';
 
 export const routes = [
     {
@@ -19,7 +20,7 @@ export const routes = [
     {
         icon:ScheduleOutlined,
         label:'Fazer chamada',
-        path:'list',
+        path:'call',
         element: <List /> ?? < ErrorPage />
     },
     {
@@ -42,9 +43,9 @@ export const routes = [
     },
     {
         icon:FileAddOutlined,
-        label: 'Vincular',
-        path: 'profile',
-        element: <ErrorPage />
+        label: 'Matricular Alunos',
+        path: 'enroll',
+        element: <Enroll /> ?? < ErrorPage />
     },
 ]
 

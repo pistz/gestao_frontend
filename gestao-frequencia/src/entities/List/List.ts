@@ -1,8 +1,8 @@
 import { IEntity } from "../Entity";
-import { IStudent } from "../Student/Student";
+import { IListRelation } from "./ListRelation";
 
 export interface IList extends IEntity{
     attendanceDate:string,
     courseId:string,
-    students:IStudent[]
+    students:IListRelation[]
 }

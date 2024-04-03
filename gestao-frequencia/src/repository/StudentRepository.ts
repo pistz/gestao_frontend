@@ -5,6 +5,7 @@ import { IStudent } from "../entities/Student/Student";
 import { updateStudentDTO } from "./dto/Student/updateStudentDTO";
 
 const student:string = endpoints.host+endpoints.api+endpoints.students;
+const enroll:string = endpoints.host+endpoints.api+endpoints.enrollment;
 
 export class StudentRepository extends Repository{
 
@@ -57,6 +58,29 @@ export class StudentRepository extends Repository{
     deleteStudent = async (id:string):Promise<void> =>{
         try {
             await axios.delete(`${student}/${id}`)
+        } catch (error) {
+            Repository.checkError(error)
+            throw Error("error: " + error);
+        }
+    }
+
+    enrollStudent = async (studentId:string, courseId:string):Promise<void> =>{
+        const sendBody = {
+            studentId:studentId,
+            courseId:courseId
+        }
+        
+        try {
+            await axios.post(enroll, sendBody)
+        } catch (error) {
+            Repository.checkError(error)
+            throw Error("error: " + error);
+        }
+    }
+
+    removeStudentToCourse = async (id:string):Promise<void> =>{
+        try {
+            await axios.delete(`${enroll}/${id}`);
         } catch (error) {
             Repository.checkError(error)
             throw Error("error: " + error);

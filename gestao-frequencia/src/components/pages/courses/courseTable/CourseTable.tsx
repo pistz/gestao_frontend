@@ -1,45 +1,41 @@
 import { Table, Space, Spin, TableColumnsType} from 'antd';
 import {useQuery, useMutation, useQueryClient} from "@tanstack/react-query"
-import IListActionsProps from "./types"
+import {IListActionsProps} from "./types"
 import type { ColumnsType } from 'antd/es/table';
 import { useEffect, useState } from 'react';
-import { IStudent } from '../../../../entities/Student/Student';
 import { notifySuccess, notifyError } from '../../../shared/popMessage/PopMessage';
 import { RemoveButton } from '../../../shared/remove-button/Remove';
+import { ICourse } from '../../../../entities/Course/Course';
 
 
-export const StudentTable = ({listQueryKey,getAllEntities,deleteEntity}:IListActionsProps<IStudent>) => {
+export const CourseTable = ({listQueryKey,getAllEntities,deleteEntity}:IListActionsProps<ICourse>) => {
 
-const columns:TableColumnsType<IStudent> = [
+const columns:TableColumnsType<ICourse> = [
     {
-        title:'Número de Registro',
+        title:'Id da Matéria',
         dataIndex:'id',
         key:'id'
     },
     {
         title:'Nome',
-        dataIndex:'firstName',
-        key:'firstName',
+        dataIndex:'name',
+        key:'name',
     },
     {
-        title:'Sobrenome',
-        dataIndex:'lastName',
-        key:'lastName',
+        title:'Ano de Início',
+        dataIndex:'startingYear',
+        key:'startingYear',
     },
     {
-        title:'E-mail',
-        dataIndex:'email',
-        key:'email'
+        title:'Escola ',
+        dataIndex:'school',
+        key:'school',
+        render:(_,record) => (record.school.schoolName)
     },
-    {
-        title:'Matérias ',
-        dataIndex:'courses',
-        key:'courses',
-        render:(_,record) => (record.courses.length)
-    }
-]
+];
 
-const [listData, setListData] = useState<IStudent[]>([]);
+
+const [listData, setListData] = useState<ICourse[]>([]);
 
 const queryClient = useQueryClient();
 
@@ -49,7 +45,7 @@ const { isLoading,isError,error } = useQuery({
 });
 
 const removeEntity = useMutation({
-    mutationFn: (entity : IStudent) => {
+    mutationFn: (entity : ICourse) => {
     return deleteEntity(entity['id']);
     },
     onSuccess: () =>{
@@ -68,20 +64,20 @@ if(isError){
 
 useEffect(()=>{
 const getTableData = async () => {
-    const tableData:IStudent[] = await getAllEntities();
+    const tableData:ICourse[] = await getAllEntities();
     if(tableData) setListData(tableData)
 }
     getTableData();
 },[listData]);
 
 
-const dataColumns:ColumnsType<IStudent> = [
+const dataColumns:ColumnsType<ICourse> = [
     ...columns,
     {
     title: 'Opções',
     render: (_,record) => (
         <Space size="middle">
-            <RemoveButton removeMethod={() => removeEntity.mutate(record)}></RemoveButton>
+        <RemoveButton removeMethod={() => removeEntity.mutate(record)}></RemoveButton>
         </Space>
     ),
     }
@@ -89,13 +85,11 @@ const dataColumns:ColumnsType<IStudent> = [
 
     return (
         <Spin spinning={isLoading}>
-                <Table 
-    rowKey="id"
-    dataSource={listData} 
-    columns={dataColumns}
-/>
-
-
+            <Table 
+                rowKey="id"
+                dataSource={listData} 
+                columns={dataColumns}
+            />
         </Spin>
     )
 }

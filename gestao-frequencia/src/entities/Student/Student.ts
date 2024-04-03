@@ -1,11 +1,11 @@
-import { ICourse } from "../Course/Course";
+import { ICourseRelation } from "../Course/CourseRelation";
 import { IEntity } from "../Entity";
-import { IList } from "../List/List";
+import { IListRelation } from "../List/ListRelation";
 
 export interface IStudent extends IEntity{
     firstName:string,
     lastName:string,
     email:string,
-    courses:ICourse[],
-    lists:IList[],
+    courses:ICourseRelation[],
+    lists:IListRelation[],
 }
