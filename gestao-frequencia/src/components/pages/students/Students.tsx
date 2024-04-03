@@ -57,7 +57,7 @@ export const Students:React.FC = () => {
     <>
       <div style={studentContainerDivStyle}>
         <header style={studentHeaderStyle}>
-          Cadastrar alunos
+            Cadastrar Alunos
         </header>
         <p>Instituição de Ensino</p>
         <p>{schoolName}</p>

@@ -54,7 +54,7 @@ export const Courses:React.FC = () => {
     <>
       <div style={courseContainerDivStyle}>
         <header style={courseHeaderStyle}>
-          Cadastrar Matérias
+          <Divider>{dividerText('cadastrar matérias')}</Divider>
         </header>
         <main style={courseMainStyle}>
           <p>Instituição de Ensino</p>
