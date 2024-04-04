@@ -3,6 +3,7 @@ import Repository from "./base/Repository";
 import { endpoints } from "../routes/endpoints";
 import { IStudent } from "../entities/Student/Student";
 import { updateStudentDTO } from "./dto/Student/updateStudentDTO";
+import { ICourseRelation } from "../entities/Course/CourseRelation";
 
 const student:string = endpoints.host+endpoints.api+endpoints.students;
 const enroll:string = endpoints.host+endpoints.api+endpoints.enrollment;
@@ -86,4 +87,32 @@ export class StudentRepository extends Repository{
             throw Error("error: " + error);
         }
     }
+
+    getCourseRelation = async (id:string):Promise<ICourseRelation> =>{
+        try {
+            const courseRelation = await axios.get(`${enroll}/${id}`);
+            return courseRelation.data;
+        } catch (error) {
+            Repository.checkError(error)
+            throw Error("error: " + error);
+        }
+    }
+
+    getCourseRelationIds = async (courseId:string, studentId:string): Promise<ICourseRelation[]> =>{
+        const params = {
+            courseId:courseId,
+            studentId:studentId
+        }
+        try {
+            const relationId = await axios.get(enroll, {
+                params:params
+            });
+            return relationId.data
+        } catch (error) {
+            Repository.checkError(error)
+            throw Error("error: " + error);
+        }
+    }
+
+
 }

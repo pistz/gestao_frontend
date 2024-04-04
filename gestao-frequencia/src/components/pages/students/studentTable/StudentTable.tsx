@@ -8,7 +8,7 @@ import { notifySuccess, notifyError } from '../../../shared/popMessage/PopMessag
 import { RemoveButton } from '../../../shared/remove-button/Remove';
 
 
-export const StudentTable = ({listQueryKey,getAllEntities,deleteEntity}:IListActionsProps<IStudent>) => {
+export const StudentTable = ({listQueryKey,getAllEntities, deleteEntity}:IListActionsProps<IStudent>) => {
 
 const columns:TableColumnsType<IStudent> = [
     {
@@ -32,7 +32,7 @@ const columns:TableColumnsType<IStudent> = [
         key:'email'
     },
     {
-        title:'Matérias ',
+        title:'Matrículas',
         dataIndex:'courses',
         key:'courses',
         render:(_,record) => (record.courses.length)
@@ -61,6 +61,7 @@ const removeEntity = useMutation({
     }
 });
 
+
 if(isError){
     notifyError(`${error}`);
 }
@@ -87,15 +88,14 @@ const dataColumns:ColumnsType<IStudent> = [
     }
 ]
 
+
     return (
         <Spin spinning={isLoading}>
-                <Table 
-    rowKey="id"
-    dataSource={listData} 
-    columns={dataColumns}
-/>
-
-
+            <Table 
+                rowKey="id"
+                dataSource={listData} 
+                columns={dataColumns}
+        />
         </Spin>
     )
 }
