@@ -22,7 +22,7 @@ export const routes = [
         label:'Fazer chamada',
         path:'call',
         element: <List /> ?? < ErrorPage />
-    },
+    },  
     {
         icon:PartitionOutlined,
         label:'Cadastrar Matéria',
@@ -36,17 +36,18 @@ export const routes = [
         element: <Students /> ?? < ErrorPage />
     },
     {
-        icon:SnippetsOutlined,
-        label:'Criar Chamadas',
-        path:'lists',
-        element: <ErrorPage />
-    },
-    {
         icon:FileAddOutlined,
         label: 'Matricular Alunos',
         path: 'enroll',
         element: <Enroll /> ?? < ErrorPage />
     },
+    {
+        icon:SnippetsOutlined,
+        label:'Criar Chamadas',
+        path:'lists',
+        element: <ErrorPage />
+    },
+
 ]
 
 

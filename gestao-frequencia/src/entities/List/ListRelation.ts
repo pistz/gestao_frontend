@@ -1,6 +1,10 @@
 import { IEntity } from "../Entity";
+import { IStudent } from "../Student/Student";
+import { IList } from "./List";
 
 export interface IListRelation extends IEntity{
-    astudentId:number,
+    studentId:number,
     attendanceListId:string,
+    list:IList,
+    student:IStudent
 }

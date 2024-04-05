@@ -12,5 +12,6 @@ export const endpoints = {
     lists:'/lists',
     attend:'/attend',
     attendId:'/attendId',
-    courseRelation:'/courseRelation'
+    courseRelation:'/courseRelation',
+    listRelation:'/listRelation'
 }
