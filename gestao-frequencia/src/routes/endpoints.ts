@@ -11,5 +11,6 @@ export const endpoints = {
     enrollment:'/enrollment',
     lists:'/lists',
     attend:'/attend',
-    attendId:'/attendId'
+    attendId:'/attendId',
+    courseRelation:'/courseRelation'
 }

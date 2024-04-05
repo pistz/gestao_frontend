@@ -7,6 +7,7 @@ import { ICourseRelation } from "../entities/Course/CourseRelation";
 
 const student:string = endpoints.host+endpoints.api+endpoints.students;
 const enroll:string = endpoints.host+endpoints.api+endpoints.enrollment;
+const relations:string = endpoints.host+endpoints.api+endpoints.courseRelation;
 
 export class StudentRepository extends Repository{
 
@@ -108,6 +109,16 @@ export class StudentRepository extends Repository{
                 params:params
             });
             return relationId.data
+        } catch (error) {
+            Repository.checkError(error)
+            throw Error("error: " + error);
+        }
+    }
+
+    getAllCourseRelations = async ():Promise<ICourseRelation[]> =>{
+        try {
+            const relation = await axios.get(relations);
+            return relation.data
         } catch (error) {
             Repository.checkError(error)
             throw Error("error: " + error);

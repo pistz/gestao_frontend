@@ -7,9 +7,11 @@ import { IStudent } from '../../../entities/Student/Student';
 import { ICourse } from '../../../entities/Course/Course';
 import { notifyError, notifySuccess } from '../../shared/popMessage/PopMessage';
 import { Button as Btn} from '../../shared/button/Button';
+import { EnrollTable } from './enrollTable/EnrollTable';
 
 const studentData = new StudentRepository();
 const courseData = new CourseRepository();
+const courseRelationQueryKey = 'courseRelationQueryKey'
 
 export const Enroll: React.FC = () => {
 
@@ -88,7 +90,6 @@ export const Enroll: React.FC = () => {
         form.setFieldValue('courseId', form.getFieldValue('studentId'));
     });
 
-    console.log(students)
     return (
         <>
         <Divider>{dividerText('matrículas')}</Divider>
@@ -150,6 +151,12 @@ export const Enroll: React.FC = () => {
                 </Space>
             </Form>
         </Drawer>
+        
+        <EnrollTable 
+            listQueryKey={courseRelationQueryKey}
+            getAllEntities={studentData.getAllCourseRelations}
+            deleteEntity={studentData.removeStudentToCourse}
+        />
         </>
     );
 };
