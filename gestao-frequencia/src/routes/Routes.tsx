@@ -20,8 +20,8 @@ export const routes = [
     {
         icon:ScheduleOutlined,
         label:'Fazer chamada',
-        path:'call',
-        element: <List /> ?? < ErrorPage />
+        path:'attendance',
+        element: < ErrorPage />
     },  
     {
         icon:PartitionOutlined,
@@ -45,7 +45,7 @@ export const routes = [
         icon:SnippetsOutlined,
         label:'Criar Chamadas',
         path:'lists',
-        element: <ErrorPage />
+        element: <List /> ?? < ErrorPage />
     },
 
 ]

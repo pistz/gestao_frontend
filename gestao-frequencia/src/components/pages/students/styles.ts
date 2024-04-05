@@ -11,7 +11,7 @@ export const studentHeaderStyle:React.CSSProperties = {
     justifyContent:'center',
     alignItems:'center',
     margin:'2rem auto',
-    fontSize:'0.9rem',
+    fontSize:'1.02rem',
     fontWeight:'bold',
     alignSelf:'center', 
     justifySelf:'center',
