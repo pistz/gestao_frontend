@@ -7,6 +7,10 @@ import { AttendanceList } from '../../../repository/ListRepository';
 import { notifyError, notifySuccess } from '../../shared/popMessage/PopMessage';
 import { ICourse } from '../../../entities/Course/Course';
 import { Button } from '../../shared/button/Button';
+import { TableContainer } from '../../shared/tableContainer/TableContainer';
+import { ListTable } from './listTable/ListTable';
+
+const listTableQueryKey = 'listTableQueryKey';
 
 export const List:React.FC = () => {
 
@@ -115,6 +119,14 @@ useEffect(()=>{
             </span>
           </Form>
         </main>
+
+        <TableContainer>
+          <ListTable 
+            listQueryKey={listTableQueryKey}
+            getAllEntities={listData.getAllAttendanceLists}
+            deleteEntity={listData.deleteAttendanceList}
+          />
+        </TableContainer>
       </div>
     </>
   )

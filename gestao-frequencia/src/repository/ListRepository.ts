@@ -25,6 +25,17 @@ export class AttendanceList extends Repository{
         }
     }
 
+    deleteAttendanceList = async (id:string):Promise<void> => {
+        try {
+            await axios.delete(`${list}/${id}`);
+        } catch (error) {
+            Repository.checkError(error)
+            throw Error("error: " + error);
+        }
+    }
+
+    
+
     getAllAttendanceLists = async ():Promise<IList[]> =>{
         try {
             const attendanceLists = await axios.get(list);
