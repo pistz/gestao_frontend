@@ -87,7 +87,7 @@ useEffect(()=>{
             <Form.Item
               name='attendanceDate'
               label='Data da Aula'
-              rules={[{required:true}]}
+              rules={[{required:true, message:'Campo obrigatório - formato dd/mm/aaaa'}]}
               style={{width:'20rem'}}
             >
               <Input

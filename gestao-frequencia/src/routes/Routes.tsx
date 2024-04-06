@@ -9,6 +9,7 @@ import { List } from '../components/pages/lists/List';
 import { Courses } from '../components/pages/courses/Courses';
 import { Students } from '../components/pages/students/Students';
 import { Enroll } from '../components/pages/enroll/Enroll';
+import { Attendance } from '../components/pages/attendance/Attendance';
 
 export const routes = [
     {
@@ -21,7 +22,7 @@ export const routes = [
         icon:ScheduleOutlined,
         label:'Fazer chamada',
         path:'attendance',
-        element: < ErrorPage />
+        element: < Attendance /> ?? < ErrorPage />
     },  
     {
         icon:PartitionOutlined,
