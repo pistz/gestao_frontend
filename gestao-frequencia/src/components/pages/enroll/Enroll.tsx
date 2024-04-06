@@ -9,6 +9,7 @@ import { notifyError, notifySuccess } from '../../shared/popMessage/PopMessage';
 import { Button as Btn} from '../../shared/button/Button';
 import { EnrollTable } from './enrollTable/EnrollTable';
 import { TableContainer } from '../../shared/tableContainer/TableContainer';
+import { enrollHeaderStyle } from './styles';
 
 const studentData = new StudentRepository();
 const courseData = new CourseRepository();
@@ -93,7 +94,9 @@ export const Enroll: React.FC = () => {
 
     return (
         <>
+        <header style={enrollHeaderStyle}>
         <Divider style={{margin:'2rem auto'}}>{dividerText('realizar matrículas')}</Divider>
+        </header>
         <span style={{display:'flex', alignItems:'center', justifyContent:"center"}}>
             <Button 
                 type="primary" 
