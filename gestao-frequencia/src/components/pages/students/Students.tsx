@@ -58,11 +58,12 @@ export const Students:React.FC = () => {
     <>
       <div style={studentContainerDivStyle}>
         <header style={studentHeaderStyle}>
-            Cadastrar Alunos
+        <Divider>{dividerText('cadastrar alunos')}</Divider>
         </header>
-        <p>Instituição de Ensino</p>
-        <p>{schoolName}</p>
+
         <main style={studentMainStyle}>
+          <p>Instituição de Ensino</p>
+          <p>{schoolName}</p>
 
           <form onSubmit={handleSubmit} style={studentFormStyle}>
 
@@ -98,7 +99,11 @@ export const Students:React.FC = () => {
             </span>
           </form>
 
-          <Divider>{dividerText('Alunos matriculados')}</Divider>
+          
+        </main>
+      </div>
+
+      <Divider>{dividerText('Alunos matriculados')}</Divider>
           <TableContainer>
             <StudentTable 
               listQueryKey={studentQueryKey} 
@@ -106,8 +111,6 @@ export const Students:React.FC = () => {
               deleteEntity={studentData.deleteStudent}
             />
           </TableContainer>
-        </main>
-      </div>
     </>
   )
 }

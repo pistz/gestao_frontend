@@ -9,7 +9,6 @@ import { notifyError, notifySuccess } from '../../shared/popMessage/PopMessage';
 import { Button as Btn} from '../../shared/button/Button';
 import { EnrollTable } from './enrollTable/EnrollTable';
 import { TableContainer } from '../../shared/tableContainer/TableContainer';
-import { enrollMainStyle } from './styles';
 
 const studentData = new StudentRepository();
 const courseData = new CourseRepository();
@@ -94,16 +93,17 @@ export const Enroll: React.FC = () => {
 
     return (
         <>
-        <Divider>{dividerText('matrículas')}</Divider>
-
-        <Button 
-            type="primary" 
-            onClick={showDrawer} 
-            icon={<PlusOutlined />}
-            style={{margin:'1rem'}}
-        >
-            Matricular Aluno
-        </Button>
+        <Divider style={{margin:'2rem auto'}}>{dividerText('realizar matrículas')}</Divider>
+        <span style={{display:'flex', alignItems:'center', justifyContent:"center"}}>
+            <Button 
+                type="primary" 
+                onClick={showDrawer} 
+                icon={<PlusOutlined />}
+                style={{margin:'1rem auto'}}
+            >
+                Matricular Aluno
+            </Button>
+        </span>
         <Drawer
             title="Realizar Matrícula em curso"
             width={800}
@@ -153,7 +153,8 @@ export const Enroll: React.FC = () => {
                 </Space>
             </Form>
         </Drawer>
-        <main style={enrollMainStyle}>
+
+        <Divider>{dividerText('matrículas efetivadas')}</Divider>
             <TableContainer>
                 <EnrollTable 
                     listQueryKey={courseRelationQueryKey}
@@ -161,7 +162,7 @@ export const Enroll: React.FC = () => {
                     deleteEntity={studentData.removeStudentToCourse}
                 />
             </TableContainer>
-        </main>
+
         </>
     );
 };

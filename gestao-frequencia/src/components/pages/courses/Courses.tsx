@@ -87,15 +87,17 @@ export const Courses:React.FC = () => {
           </form>
           <Divider>{dividerText('listagem de matérias cadastradas')}</Divider>
 
-          <TableContainer>
+
+        </main>
+
+      </div>
+      <TableContainer>
             <CourseTable 
               listQueryKey={courseQueryKey}
               getAllEntities={courseData.getAllCourses}
               deleteEntity={courseData.deleteCourse}
             />
-          </TableContainer>
-        </main>
-      </div>
+      </TableContainer>
     </>
   )
 }

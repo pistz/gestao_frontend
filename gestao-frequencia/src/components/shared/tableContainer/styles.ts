@@ -8,9 +8,10 @@ export const TableContainerStyle:React.CSSProperties = {
     position:'relative',
     minHeight:'10vh',
     margin:'1rem auto',
-    overflow:'visible',
+    overflow:'auto',
     background:'transparent',
     border:'0.0625rem solid ',
     borderRadius:'0.25rem 0.25rem',
-    fontSizeAdjust:'from-font'
+    fontSizeAdjust:'from-font',
+    maxWidth:'80%'
 }
