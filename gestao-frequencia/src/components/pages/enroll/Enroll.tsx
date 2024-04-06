@@ -8,6 +8,8 @@ import { ICourse } from '../../../entities/Course/Course';
 import { notifyError, notifySuccess } from '../../shared/popMessage/PopMessage';
 import { Button as Btn} from '../../shared/button/Button';
 import { EnrollTable } from './enrollTable/EnrollTable';
+import { TableContainer } from '../../shared/tableContainer/TableContainer';
+import { enrollMainStyle } from './styles';
 
 const studentData = new StudentRepository();
 const courseData = new CourseRepository();
@@ -151,12 +153,15 @@ export const Enroll: React.FC = () => {
                 </Space>
             </Form>
         </Drawer>
-        
-        <EnrollTable 
-            listQueryKey={courseRelationQueryKey}
-            getAllEntities={studentData.getAllCourseRelations}
-            deleteEntity={studentData.removeStudentToCourse}
-        />
+        <main style={enrollMainStyle}>
+            <TableContainer>
+                <EnrollTable 
+                    listQueryKey={courseRelationQueryKey}
+                    getAllEntities={studentData.getAllCourseRelations}
+                    deleteEntity={studentData.removeStudentToCourse}
+                />
+            </TableContainer>
+        </main>
         </>
     );
 };

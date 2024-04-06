@@ -7,6 +7,7 @@ import { notifyError, notifySuccess } from '../../shared/popMessage/PopMessage';
 import { useAuth } from '../../../hooks/useAuth';
 import { Divider } from 'antd';
 import { CourseTable } from './courseTable/CourseTable';
+import { TableContainer } from '../../shared/tableContainer/TableContainer';
 
 const courseQueryKey = 'courseQueryKey';
 
@@ -86,12 +87,13 @@ export const Courses:React.FC = () => {
           </form>
           <Divider>{dividerText('listagem de matérias cadastradas')}</Divider>
 
-
-          <CourseTable 
-            listQueryKey={courseQueryKey}
-            getAllEntities={courseData.getAllCourses}
-            deleteEntity={courseData.deleteCourse}
-          />
+          <TableContainer>
+            <CourseTable 
+              listQueryKey={courseQueryKey}
+              getAllEntities={courseData.getAllCourses}
+              deleteEntity={courseData.deleteCourse}
+            />
+          </TableContainer>
         </main>
       </div>
     </>

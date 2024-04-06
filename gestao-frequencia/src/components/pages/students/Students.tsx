@@ -7,6 +7,7 @@ import { Button } from '../../shared/button/Button';
 import { useAuth } from '../../../hooks/useAuth';
 import { Divider } from 'antd';
 import { StudentTable } from './studentTable/StudentTable';
+import { TableContainer } from '../../shared/tableContainer/TableContainer';
 
 
 const studentQueryKey = 'studentQueryKey';
@@ -98,13 +99,13 @@ export const Students:React.FC = () => {
           </form>
 
           <Divider>{dividerText('Alunos matriculados')}</Divider>
-
-          <StudentTable 
-            listQueryKey={studentQueryKey} 
-            getAllEntities={studentData.getAllStudents} 
-            deleteEntity={studentData.deleteStudent}
-          />
-
+          <TableContainer>
+            <StudentTable 
+              listQueryKey={studentQueryKey} 
+              getAllEntities={studentData.getAllStudents} 
+              deleteEntity={studentData.deleteStudent}
+            />
+          </TableContainer>
         </main>
       </div>
     </>

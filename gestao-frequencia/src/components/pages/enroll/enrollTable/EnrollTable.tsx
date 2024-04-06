@@ -12,11 +12,6 @@ export const EnrollTable = ({listQueryKey,getAllEntities, deleteEntity}:ICourseR
 
 const columns:TableColumnsType<ICourseRelation> = [
     {
-        title:'Número de Registro',
-        dataIndex:'id',
-        key:'id'
-    },
-    {
         title:'Nome',
         key:'firstName',
         render:(_,value) => <>{value.student.firstName}</>

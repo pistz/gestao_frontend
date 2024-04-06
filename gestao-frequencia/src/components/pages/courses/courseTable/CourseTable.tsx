@@ -12,11 +12,6 @@ export const CourseTable = ({listQueryKey,getAllEntities,deleteEntity}:IListActi
 
 const columns:TableColumnsType<ICourse> = [
     {
-        title:'Id da Matéria',
-        dataIndex:'id',
-        key:'id'
-    },
-    {
         title:'Nome',
         dataIndex:'name',
         key:'name',
