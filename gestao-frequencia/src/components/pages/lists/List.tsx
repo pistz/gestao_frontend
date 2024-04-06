@@ -109,14 +109,11 @@ useEffect(()=>{
                 </Form.Item>
                 </Col>
             </Row>
-
             <span style={{display:'inline-flex'}}>
               <Button text = "Cadastrar" type="submit" click={handleSubmit}/>
               <Button text = "Limpar" type='reset' click={()=>{clearForm();notifySuccess("Formulário limpo")}}/>
             </span>
-
           </Form>
-
         </main>
       </div>
     </>

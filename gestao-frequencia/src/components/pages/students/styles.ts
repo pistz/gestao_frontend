@@ -39,7 +39,8 @@ export const studentInputStyle:React.CSSProperties = {
     position:'relative',
     padding:'0.5rem',
     margin:'0.5rem',
-    minWidth:'40vw',
-    border:'0.1rem solid #001529',
-    borderRadius:'0.1rem 0.1rem'
+    minWidth:'30vw',
+    maxWidth:'100vw',
+    border:'0.1rem solid #dadada',
+    borderRadius:'0.375rem'
 };
