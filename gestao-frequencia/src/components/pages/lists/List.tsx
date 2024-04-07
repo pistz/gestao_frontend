@@ -9,15 +9,19 @@ import { ICourse } from '../../../entities/Course/Course';
 import { Button } from '../../shared/button/Button';
 import { TableContainer } from '../../shared/tableContainer/TableContainer';
 import { ListTable } from './listTable/ListTable';
+import { useTableData } from '../../../hooks/useTableData';
 
 const listTableQueryKey = 'listTableQueryKey';
+const listData = new AttendanceList();
 
 export const List:React.FC = () => {
 
   const courseData = new CourseRepository();
-  const listData = new AttendanceList();
+
 
   const {schoolName} = useAuth();
+
+  const {setListsTableData} = useTableData();
 
   const [courses, setCourses] = useState<ICourse[]>([])
 
@@ -36,7 +40,12 @@ export const List:React.FC = () => {
       console.log('List created:', data);
       notifySuccess("Lista de Chamada Cadastrada");
       clearForm();
-    }).catch(error => {
+    })
+    .then(async ()=>{
+      const res = await listData.getAllAttendanceLists();
+      setListsTableData(res)
+    })    
+    .catch(error => {
       notifyError("Erro ao cadastrar Lista");
       console.error('Error creating Attendance List:', error);
     });
@@ -62,7 +71,7 @@ const dividerText = (text:string):string => {
 useEffect(()=>{
   form.setFieldValue('attendanceDate', form.getFieldValue('attendanceDate'));
   form.setFieldValue('courseId', form.getFieldValue('studentId'));
-});
+},[form]);
 
   return (
     <>
