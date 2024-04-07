@@ -10,12 +10,15 @@ import { Button as Btn} from '../../shared/button/Button';
 import { EnrollTable } from './enrollTable/EnrollTable';
 import { TableContainer } from '../../shared/tableContainer/TableContainer';
 import { enrollHeaderStyle } from './styles';
+import { useTableData } from '../../../hooks/useTableData';
 
 const studentData = new StudentRepository();
 const courseData = new CourseRepository();
 const courseRelationQueryKey = 'courseRelationQueryKey'
 
 export const Enroll: React.FC = () => {
+
+    const {setEnrollTableData} = useTableData();
 
     const [form] = Form.useForm();
 
@@ -40,7 +43,12 @@ export const Enroll: React.FC = () => {
             console.log(e)
             notifySuccess("Estudante matriculado");
             onClose();
-        }).catch(error => {
+        })
+        .then(async ()=>{
+            const res = await studentData.getAllCourseRelations();
+            setEnrollTableData(res);
+        })
+        .catch(error => {
             setOpen(false)
             notifyError("Erro ao matricular estudante");
             clearForm();
