@@ -62,9 +62,11 @@ const removeEntity = useMutation({
     mutationFn: (entity : IList) => {
     return deleteEntity(entity['id']);
     },
-    onSuccess: () =>{
+    onSuccess: async () =>{
         notifySuccess("Entrada removida")
         queryClient.invalidateQueries({ queryKey: [listQueryKey] });
+        const tableData:IList[] = await getAllEntities();
+        setListsTableData(tableData)
     },
     onError: (error)=>{
         notifyError(`${error}`);
