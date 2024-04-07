@@ -23,12 +23,10 @@ export const Enroll: React.FC = () => {
         form.resetFields();
     }
 
-
     const [open, setOpen] = useState(false);
 
     const [students, setStudents] = useState<IStudent[]>([]);
     const [courses, setCourses] = useState<ICourse[]>([])
-
 
     const dividerText = (text:string):string => {
         return text.toUpperCase();
@@ -41,8 +39,7 @@ export const Enroll: React.FC = () => {
             .then((e) => {
             console.log(e)
             notifySuccess("Estudante matriculado");
-            setOpen(false)
-            clearForm();
+            onClose();
         }).catch(error => {
             setOpen(false)
             notifyError("Erro ao matricular estudante");
@@ -90,12 +87,12 @@ export const Enroll: React.FC = () => {
     useEffect(()=>{
         form.setFieldValue('studentId', form.getFieldValue('studentId'));
         form.setFieldValue('courseId', form.getFieldValue('studentId'));
-    });
+    },[form]);
 
     return (
         <>
         <header style={enrollHeaderStyle}>
-        <Divider style={{margin:'2rem auto'}}>{dividerText('realizar matrículas')}</Divider>
+            <Divider style={{margin:'2rem auto'}}>{dividerText('realizar matrículas')}</Divider>
         </header>
         <span style={{display:'flex', alignItems:'center', justifyContent:"center"}}>
             <Button 
@@ -108,6 +105,7 @@ export const Enroll: React.FC = () => {
             </Button>
         </span>
         <Drawer
+            
             title="Realizar Matrícula em curso"
             width={800}
             onClose={onClose}
@@ -158,13 +156,13 @@ export const Enroll: React.FC = () => {
         </Drawer>
 
         <Divider>{dividerText('matrículas efetivadas')}</Divider>
-            <TableContainer>
-                <EnrollTable 
-                    listQueryKey={courseRelationQueryKey}
-                    getAllEntities={studentData.getAllCourseRelations}
-                    deleteEntity={studentData.removeStudentToCourse}
-                />
-            </TableContainer>
+        <TableContainer>
+            <EnrollTable 
+                listQueryKey={courseRelationQueryKey}
+                getAllEntities={studentData.getAllCourseRelations}
+                deleteEntity={studentData.removeStudentToCourse}
+            />
+        </TableContainer>
 
         </>
     );

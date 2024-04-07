@@ -16,7 +16,6 @@ export const Students:React.FC = () => {
 
   const studentData = new StudentRepository();
 
-
   const {schoolName} = useAuth();
 
   const initialFormData:createStudentDTO = {

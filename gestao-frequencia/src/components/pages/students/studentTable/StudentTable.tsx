@@ -2,10 +2,11 @@ import { Table, Space, Spin, TableColumnsType} from 'antd';
 import {useQuery, useMutation, useQueryClient} from "@tanstack/react-query"
 import IListActionsProps from "./types"
 import type { ColumnsType } from 'antd/es/table';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { IStudent } from '../../../../entities/Student/Student';
 import { notifySuccess, notifyError } from '../../../shared/popMessage/PopMessage';
 import { RemoveButton } from '../../../shared/remove-button/Remove';
+import { useTableData } from '../../../../hooks/useTableData';
 
 
 export const StudentTable = ({listQueryKey,getAllEntities, deleteEntity}:IListActionsProps<IStudent>) => {
@@ -39,7 +40,7 @@ const columns:TableColumnsType<IStudent> = [
     }
 ]
 
-const [listData, setListData] = useState<IStudent[]>([]);
+const {studentsTableData, setStudentsTableData} = useTableData();
 
 const queryClient = useQueryClient();
 
@@ -52,9 +53,11 @@ const removeEntity = useMutation({
     mutationFn: (entity : IStudent) => {
     return deleteEntity(entity['id']);
     },
-    onSuccess: () =>{
+    onSuccess: async () =>{
         notifySuccess("Entrada removida")
         queryClient.invalidateQueries({ queryKey: [listQueryKey] });
+        const tableData:IStudent[] = await getAllEntities();
+        setStudentsTableData(tableData)
     },
     onError: (error)=>{
         notifyError(`${error}`);
@@ -70,10 +73,10 @@ if(isError){
 useEffect(()=>{
 const getTableData = async () => {
     const tableData:IStudent[] = await getAllEntities();
-    if(tableData) setListData(tableData)
+    if(tableData) setStudentsTableData(tableData)
 }
     getTableData();
-},[listData]);
+},[getAllEntities, setStudentsTableData]);
 
 
 const dataColumns:ColumnsType<IStudent> = [
@@ -93,7 +96,7 @@ const dataColumns:ColumnsType<IStudent> = [
         <Spin spinning={isLoading}>
             <Table 
                 rowKey="id"
-                dataSource={listData} 
+                dataSource={studentsTableData} 
                 columns={dataColumns}
         />
         </Spin>

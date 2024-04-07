@@ -13,7 +13,7 @@ const courseQueryKey = 'courseQueryKey';
 
 export const Courses:React.FC = () => {
 
-  const courseData = new CourseRepository();
+  const courseDataRepository = new CourseRepository();
 
   const {userSchoolId, schoolName} = useAuth();
 
@@ -40,7 +40,7 @@ export const Courses:React.FC = () => {
   const handleSubmit = async (e:FormEvent) => {
     e.preventDefault();
 
-    await courseData.createCourse(formData.name, formData.startingYear, formData.schoolId)
+    await courseDataRepository.createCourse(formData.name, formData.startingYear, formData.schoolId)
       .then(data => {
       console.log('Course created:', data);
       notifySuccess("matéria cadastrada");
@@ -94,8 +94,8 @@ export const Courses:React.FC = () => {
       <TableContainer>
             <CourseTable 
               listQueryKey={courseQueryKey}
-              getAllEntities={courseData.getAllCourses}
-              deleteEntity={courseData.deleteCourse}
+              getAllEntities={courseDataRepository.getAllCourses}
+              deleteEntity={courseDataRepository.deleteCourse}
             />
       </TableContainer>
     </>

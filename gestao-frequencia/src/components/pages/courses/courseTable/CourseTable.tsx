@@ -2,13 +2,16 @@ import { Table, Space, Spin, TableColumnsType} from 'antd';
 import {useQuery, useMutation, useQueryClient} from "@tanstack/react-query"
 import {IListActionsProps} from "./types"
 import type { ColumnsType } from 'antd/es/table';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { notifySuccess, notifyError } from '../../../shared/popMessage/PopMessage';
 import { RemoveButton } from '../../../shared/remove-button/Remove';
 import { ICourse } from '../../../../entities/Course/Course';
+import { useTableData } from '../../../../hooks/useTableData';
 
 
 export const CourseTable = ({listQueryKey,getAllEntities,deleteEntity}:IListActionsProps<ICourse>) => {
+
+const {coursesTableData, setCoursesTableData} = useTableData();
 
 const columns:TableColumnsType<ICourse> = [
     {
@@ -30,8 +33,6 @@ const columns:TableColumnsType<ICourse> = [
 ];
 
 
-const [listData, setListData] = useState<ICourse[]>([]);
-
 const queryClient = useQueryClient();
 
 const { isLoading,isError,error } = useQuery({
@@ -43,9 +44,11 @@ const removeEntity = useMutation({
     mutationFn: (entity : ICourse) => {
     return deleteEntity(entity['id']);
     },
-    onSuccess: () =>{
+    onSuccess: async () =>{
         notifySuccess("Entrada removida")
         queryClient.invalidateQueries({ queryKey: [listQueryKey] });
+        const tableData:ICourse[] = await getAllEntities();
+        setCoursesTableData(tableData)
     },
     onError: (error)=>{
         notifyError(`${error}`);
@@ -60,10 +63,10 @@ if(isError){
 useEffect(()=>{
 const getTableData = async () => {
     const tableData:ICourse[] = await getAllEntities();
-    if(tableData) setListData(tableData)
+    if(tableData) setCoursesTableData(tableData)
 }
     getTableData();
-},[listData]);
+},[getAllEntities, setCoursesTableData]);
 
 
 const dataColumns:ColumnsType<ICourse> = [
@@ -82,7 +85,7 @@ const dataColumns:ColumnsType<ICourse> = [
         <Spin spinning={isLoading}>
             <Table 
                 rowKey="id"
-                dataSource={listData} 
+                dataSource={coursesTableData} 
                 columns={dataColumns}
             />
         </Spin>

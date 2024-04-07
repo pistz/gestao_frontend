@@ -1,4 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
+import { IStudent } from "../entities/Student/Student";
+import { ICourse } from "../entities/Course/Course";
+import { IList } from "../entities/List/List";
+import { IListRelation } from "../entities/List/ListRelation";
+import { ICourseRelation } from "../entities/Course/CourseRelation";
 
 export interface IChildren {
     children: React.ReactNode;
@@ -19,4 +24,18 @@ export interface AuthContextData {
     setUserPassword:Dispatch<SetStateAction<string>>;
     setUserSchoolId:Dispatch<SetStateAction<string>>;
     setSchoolname:Dispatch<SetStateAction<string>>;
+}
+
+export interface TablesContextData {
+    studentsTableData:IStudent[],
+    coursesTableData:ICourse[],
+    listsTableData:IList[],
+    attendanceTableData:IListRelation[],
+    enrollTableData:ICourseRelation[]
+
+    setStudentsTableData:Dispatch<SetStateAction<IStudent[]>>;
+    setCoursesTableData:Dispatch<SetStateAction<ICourse[]>>;
+    setListsTableData:Dispatch<SetStateAction<IList[]>>;
+    setAttendanceTableData:Dispatch<SetStateAction<IListRelation[]>>;
+    setEnrollTableData:Dispatch<SetStateAction<ICourseRelation[]>>;
 }
