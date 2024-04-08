@@ -124,7 +124,7 @@ export const Enroll: React.FC = () => {
             },
             }}
         >
-            <Form layout="vertical" name='enroll' form={form} onFinish={()=>{form.getFieldValue('studentId'), form.getFieldValue('courseId')}}>
+            <Form layout="vertical" name='enroll' form={form} onFinish={handleSubmit}>
             <Row gutter={[4,4]}>
                 <Col span={100}>
                 <Form.Item
