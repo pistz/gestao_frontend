@@ -19,11 +19,11 @@ export const Attendance:React.FC = () => {
     const [date, setDate] = useState<string>('')
 
     const showDrawer = () => {
-      setOpen(true);
+        setOpen(true);
     };
-  
+
     const onClose = () => {
-      setOpen(false);
+        setOpen(false);
     };
 
     const dividerText = (text:string):string => {
@@ -108,8 +108,10 @@ export const Attendance:React.FC = () => {
         <div style={attendanceMainStyle}>
             {selectedCourse && listsTableData.map((list, index) => {
                 if (isValidDate(list.attendanceDate)) {
+                    
                     return (
-                        <Button key={index} text={list.attendanceDate} type='button' click={showDrawer} />
+                        <Button key={index} text={list.attendanceDate} type='button' click={showDrawer} textTransform={()=>setDate(list.attendanceDate)}/>
+                        
                     );
                 }
                 return null;

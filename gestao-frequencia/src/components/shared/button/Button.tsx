@@ -3,7 +3,7 @@ import { ButtonProps } from './types';
 
 
 
-export const Button: React.FC<ButtonProps> = ({text, type, click}) => {
+export const Button: React.FC<ButtonProps> = ({text, type, click, textTransform}) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isActive, setIsActive] = useState(false);
 
@@ -33,6 +33,7 @@ export const Button: React.FC<ButtonProps> = ({text, type, click}) => {
             onMouseDown={() => setIsActive(true)}
             onMouseUp={() => setIsActive(false)}
             onClick={click}
+            onPointerLeave={textTransform}
         >
             {text}
         </button>
