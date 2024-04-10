@@ -4,7 +4,7 @@ import { IStudent } from "../Student/Student";
 import { IList } from "./List";
 
 export interface IListRelation extends IEntity{
-    studentId:number,
+    studentId:string,
     attendanceListId:string,
     list:IList,
     student:IStudent

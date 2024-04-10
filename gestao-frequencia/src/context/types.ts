@@ -31,11 +31,16 @@ export interface TablesContextData {
     coursesTableData:ICourse[],
     listsTableData:IList[],
     attendanceTableData:IListRelation[],
-    enrollTableData:ICourseRelation[]
+    enrollTableData:ICourseRelation[],
+    courseId:string,
+    attendanceListId:string
+
 
     setStudentsTableData:Dispatch<SetStateAction<IStudent[]>>;
     setCoursesTableData:Dispatch<SetStateAction<ICourse[]>>;
     setListsTableData:Dispatch<SetStateAction<IList[]>>;
     setAttendanceTableData:Dispatch<SetStateAction<IListRelation[]>>;
     setEnrollTableData:Dispatch<SetStateAction<ICourseRelation[]>>;
+    setCourseId:Dispatch<SetStateAction<string>>;
+    setAttendanceListId:Dispatch<SetStateAction<string>>;
 }

@@ -6,5 +6,5 @@ export interface ButtonProps {
     text: string;
     type:buttonType,
     click?:MouseEventHandler<HTMLButtonElement>,
-    textTransform?:()=>void
+    textTransform?:()=>void,
 }

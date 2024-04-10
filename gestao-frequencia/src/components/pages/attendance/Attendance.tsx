@@ -6,6 +6,7 @@ import { CourseRepository } from '../../../repository/CourseRepository';
 import { AttendanceList } from '../../../repository/ListRepository';
 import { useTableData } from '../../../hooks/useTableData';
 import { Button } from '../../shared/button/Button';
+import AttendanceTable from './attendanceTable/AttendanceTable';
 
 const courseData = new CourseRepository(); 
 const listData = new AttendanceList();
@@ -14,9 +15,12 @@ export const Attendance:React.FC = () => {
 
     const [courseOptions, setCourseOptions] = useState<{value:string, label:string}[]>([]);
     const [selectedCourse, setSelectedCourse] = useState<string | undefined>(undefined);
-    const {attendanceTableData, setAttendanceTableData, listsTableData, setListsTableData} = useTableData();
+    
+    const {listsTableData, setListsTableData, courseId, setCourseId, attendanceListId, setAttendanceListId} = useTableData();
+
     const [open, setOpen] = useState(false);
-    const [date, setDate] = useState<string>('')
+    const [date, setDate] = useState<string>('');
+
 
     const showDrawer = () => {
         setOpen(true);
@@ -75,12 +79,13 @@ export const Attendance:React.FC = () => {
         ) {
             return false;
         }
-    
-        const currentDate = new Date();
-        return inputDate <= currentDate
 
+        const currentDate = new Date();
+
+        return String(String(inputDate.getDate)+String(inputDate.getMonth)+String(inputDate.getFullYear)) === String(String(currentDate.getDate)+String(currentDate.getMonth)+String(currentDate.getFullYear))
     };
-    
+
+
     return (
         <>
         <div style={listContainerDivStyle}>
@@ -101,26 +106,36 @@ export const Attendance:React.FC = () => {
                         options={courseOptions}
                         onChange={handleCourseChange}
                     />
-                    
                 </section>
         </div>
         <Divider>{dividerText('chamadas disponíveis')}</Divider>
         <div style={attendanceMainStyle}>
             {selectedCourse && listsTableData.map((list, index) => {
                 if (isValidDate(list.attendanceDate)) {
-                    
                     return (
-                        <Button key={index} text={list.attendanceDate} type='button' click={showDrawer} textTransform={()=>setDate(list.attendanceDate)}/>
+                        <Button 
+                            key={index} 
+                            text={list.attendanceDate} 
+                            type='button' 
+                            click={showDrawer} 
+                            textTransform={()=>{
+                                setDate(list.attendanceDate);
+                                setCourseId(list.courseId);
+                                setAttendanceListId(list.id);}
+                            }
+                        />
                         
                     );
                 }
                 return null;
             })}
         </div>
+
         <Drawer title={date} onClose={onClose} open={open} size='large'>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <AttendanceTable 
+                idCourse={courseId}
+                listId={attendanceListId}
+            />
         </Drawer>
 
         

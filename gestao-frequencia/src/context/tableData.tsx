@@ -21,6 +21,10 @@ export const TableDataProvider: React.FC<IChildren> = ({ children }:IChildren) =
 
     const [enrollTableData, setEnrollTableData] = useState<ICourseRelation[]>([]);
 
+    const [courseId, setCourseId] = useState<string>('');
+
+    const [attendanceListId, setAttendanceListId] = useState<string>('');
+
 
 
     return (
@@ -34,7 +38,11 @@ export const TableDataProvider: React.FC<IChildren> = ({ children }:IChildren) =
             attendanceTableData,
             setAttendanceTableData,
             enrollTableData,
-            setEnrollTableData
+            setEnrollTableData,
+            courseId,
+            setCourseId,
+            attendanceListId,
+            setAttendanceListId
     }}>
         {children}
     </TableDataContext.Provider>
