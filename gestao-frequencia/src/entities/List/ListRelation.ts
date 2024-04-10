@@ -9,4 +9,5 @@ export interface IListRelation extends IEntity{
     list:IList,
     student:IStudent
     course:ICourse
+    createdAt:Date
 }

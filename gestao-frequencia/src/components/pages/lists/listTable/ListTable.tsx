@@ -69,7 +69,8 @@ const removeEntity = useMutation({
         setListsTableData(tableData)
     },
     onError: (error)=>{
-        notifyError(`${error}`);
+        console.error(error)
+        notifyError("Há alunos presentes nesta lista");
     }
 });
 

@@ -37,6 +37,12 @@ const columns:TableColumnsType<IStudent> = [
         dataIndex:'courses',
         key:'courses',
         render:(_,record) => (record.courses.length)
+    },
+    {
+        title:'Presenças',
+        dataIndex:'lists',
+        key:'lists',
+        render:(_,record) => (record.lists.length)
     }
 ]
 
