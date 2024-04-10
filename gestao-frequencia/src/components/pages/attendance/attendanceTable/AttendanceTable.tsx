@@ -25,7 +25,7 @@ const AttendanceTable: React.FC<Props> = ({ listId, idCourse }) => {
     setCourseId(idCourse);
     setAttendanceListId(listId);
 
-
+    //TODO fix bug
     const fetchStudents = async () => {
         try {
         const students = await studentData.getAllStudents();
