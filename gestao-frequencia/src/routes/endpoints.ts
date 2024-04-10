@@ -1,7 +1,7 @@
 
 export const endpoints = {
     
-    host:'http://localhost:3001',
+    host:process.env.BASE_URL,
     api:'/api/v1',
     students:'/students',
     course:'/course',
