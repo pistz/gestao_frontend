@@ -30,65 +30,61 @@ const AttendanceTable: React.FC<Props> = ({ listId, idCourse }) => {
     setCourseId(idCourse);
     setAttendanceListId(listId);
 
-    const fetchStudents = async () => {
-        try {
+    useEffect(() => {
+        const fetchStudents = async () => {
+            try {
             const students = await studentData.getAllStudents();
             const studentsWithCourse = students.filter((student) =>
-                student.courses.some((course) => {
-                    return course.courseId === courseId; //
-                })
+                student.courses.some((course) => course.courseId === courseId)
             );
             setStudentsTableData(studentsWithCourse);
-        } catch (error) {
+            } catch (error) {
             console.error('Error fetching students:', error);
-        }
+            }
+        };
+
+        fetchStudents(); 
+        }, [setStudentsTableData, courseId]); 
+
+    const attendToClass = async (studentId: string, attendanceListId:string):Promise<void> => {
+            try {
+                await listData.attendToClass(studentId, attendanceListId);
+                setDisabledButtons((prevButtons) => [...prevButtons, studentId]);
+                notifySuccess("Presença registrada!")
+            } catch (error) {
+                notifyError("Aluno já possui presença registrada")
+            }
     };
-    
 
-  useEffect(() => {
-    fetchStudents();
-  },[]);
+    const columns = [
+        {
+        title: 'Nome',
+        dataIndex: 'firstName',
+        key: 'firstName',
+        },
+        {
+        title: 'Sobrenome',
+        dataIndex: 'lastName',
+        key: 'lastName',
+        },
+        {
+        title: 'Chamada',
+        key: 'attend',
+        render: (_:IStudent, student: IStudent) => (
+            <Button 
+                key={student.id} 
+                disabled={disabledButtons.includes(student.id)}  
+                onClick={() => attendToClass(student.id, attendanceListId)}
+                >
+                    {disabledButtons.includes(student.id)? "Presente!":"Ausente"}
+            </Button>
+        ),
+        },
+    ];
 
-
-  const attendToClass = async (studentId: string, attendanceListId:string):Promise<void> => {
-        try {
-            await listData.attendToClass(studentId, attendanceListId);
-            setDisabledButtons((prevButtons) => [...prevButtons, studentId]);
-            notifySuccess("Presença registrada!")
-        } catch (error) {
-            notifyError("Aluno já possui presença registrada")
-        }
-  };
-
-  const columns = [
-    {
-      title: 'Nome',
-      dataIndex: 'firstName',
-      key: 'firstName',
-    },
-    {
-      title: 'Sobrenome',
-      dataIndex: 'lastName',
-      key: 'lastName',
-    },
-    {
-      title: 'Chamada',
-      key: 'attend',
-      render: (_:IStudent, student: IStudent) => (
-        <Button 
-            key={student.id} 
-            disabled={disabledButtons.includes(student.id)}  
-            onClick={() => attendToClass(student.id, attendanceListId)}
-            >
-                {disabledButtons.includes(student.id)? "Presente!":"Ausente"}
-        </Button>
-      ),
-    },
-  ];
-
-  return (
-    <Table dataSource={studentsTableData} columns={columns} pagination={false} />
-  );
+    return (
+        <Table dataSource={studentsTableData} columns={columns} pagination={false} />
+    );
 };
 
 export default AttendanceTable;
