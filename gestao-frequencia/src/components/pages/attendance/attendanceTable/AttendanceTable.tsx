@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Table, Button } from 'antd';
 import { StudentRepository } from '../../../../repository/StudentRepository';
 import { useTableData } from '../../../../hooks/useTableData';
 import { AttendanceList } from '../../../../repository/ListRepository';
+import { IStudent } from '../../../../entities/Student/Student';
+import { notifyError, notifySuccess } from '../../../shared/popMessage/PopMessage';
 
 interface Props{
     listId: string;
@@ -12,6 +15,8 @@ const studentData = new StudentRepository();
 const listData = new AttendanceList();
 
 const AttendanceTable: React.FC<Props> = ({ listId, idCourse }) => {
+
+    const [disabledButtons, setDisabledButtons] = useState<string[]>([]);
 
     const {
         studentsTableData, 
@@ -46,30 +51,43 @@ const AttendanceTable: React.FC<Props> = ({ listId, idCourse }) => {
 
 
   const attendToClass = async (studentId: string, attendanceListId:string):Promise<void> => {
-        await listData.attendToClass(studentId, attendanceListId)
+        try {
+            await listData.attendToClass(studentId, attendanceListId);
+            setDisabledButtons((prevButtons) => [...prevButtons, studentId]);
+            notifySuccess("Presença registrada!")
+        } catch (error) {
+            notifyError("Aluno já possui presença registrada")
+        }
   };
 
+  const columns = [
+    {
+      title: 'Nome',
+      dataIndex: 'firstName',
+      key: 'firstName',
+    },
+    {
+      title: 'Sobrenome',
+      dataIndex: 'lastName',
+      key: 'lastName',
+    },
+    {
+      title: 'Chamada',
+      key: 'attend',
+      render: (_:IStudent, student: IStudent) => (
+        <Button 
+            key={student.id} 
+            disabled={disabledButtons.includes(student.id)}  
+            onClick={() => attendToClass(student.id, attendanceListId)}
+            >
+                {disabledButtons.includes(student.id)? "Presente!":"Ausente"}
+        </Button>
+      ),
+    },
+  ];
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Sobrenome</th>
-          <th>Chamada</th>
-        </tr>
-      </thead>
-      <tbody>
-        {studentsTableData.map((student) => (
-          <tr key={student.id}>
-            <td>{student.firstName}</td>
-            <td>{student.lastName}</td>
-            <td>
-              <button onClick={() => attendToClass(student.id,attendanceListId)}>Presente!</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <Table dataSource={studentsTableData} columns={columns} pagination={false} />
   );
 };
 
