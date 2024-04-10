@@ -82,7 +82,12 @@ export const Attendance:React.FC = () => {
 
         const currentDate = new Date();
 
-        return String(String(inputDate.getDate)+String(inputDate.getMonth)+String(inputDate.getFullYear)) === String(String(currentDate.getDate)+String(currentDate.getMonth)+String(currentDate.getFullYear))
+        return (
+            inputDate.getFullYear() === currentDate.getFullYear() &&
+            inputDate.getMonth() === currentDate.getMonth() &&
+            inputDate.getDate() === currentDate.getDate()
+        );
+
     };
 
 

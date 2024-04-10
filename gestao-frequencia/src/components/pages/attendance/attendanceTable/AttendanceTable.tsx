@@ -25,23 +25,20 @@ const AttendanceTable: React.FC<Props> = ({ listId, idCourse }) => {
     setCourseId(idCourse);
     setAttendanceListId(listId);
 
-    //TODO fix bug
     const fetchStudents = async () => {
         try {
-        const students = await studentData.getAllStudents();
-        const relations = await studentData.getAllCourseRelations();
-
-        const courseFilter = relations.filter((course)=>{
-            course.courseId === courseId ? course.id : null
-        });
-
-        setStudentsTableData(students);
-        console.log(courseFilter, relations, courseId)
+            const students = await studentData.getAllStudents();
+            const studentsWithCourse = students.filter((student) =>
+                student.courses.some((course) => {
+                    return course.courseId === courseId; //
+                })
+            );
+            setStudentsTableData(studentsWithCourse);
         } catch (error) {
-        console.error('Error fetching students:', error);
+            console.error('Error fetching students:', error);
         }
     };
-
+    
 
   useEffect(() => {
     fetchStudents();
