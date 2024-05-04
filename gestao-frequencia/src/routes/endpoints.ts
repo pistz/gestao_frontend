@@ -1,7 +1,7 @@
 
 export const endpoints = {
     
-    host:process.env.BASE_URL,
+    host:process.env.BASE_URL2,
     api:'api/v1',
     students:'/students',
     course:'/course',

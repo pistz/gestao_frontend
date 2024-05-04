@@ -16,37 +16,43 @@ export const routes = [
         icon:HomeOutlined,
         label:'Home',
         path:'main',
-        element: <Welcome /> ?? < ErrorPage />
+        element: <Welcome /> ?? < ErrorPage />,
+        role:['ADMIN, DESK, PROFESSOR']
     },
     {
         icon:ScheduleOutlined,
         label:'Fazer chamada',
         path:'attendance',
-        element: < Attendance /> ?? < ErrorPage />
+        element: < Attendance /> ?? < ErrorPage />,
+        role:['ADMIN, PROFESSOR']
     },  
     {
         icon:PartitionOutlined,
         label:'Cadastrar Matéria',
         path:'course',
-        element: <Courses /> ?? < ErrorPage />
+        element: <Courses /> ?? < ErrorPage />,
+        role:['ADMIN, DESK']
     },
     {
         icon:UsergroupAddOutlined,
         label:'Cadastrar Alunos',
         path:'students',
-        element: <Students /> ?? < ErrorPage />
+        element: <Students /> ?? < ErrorPage />,
+        role:['ADMIN, DESK']
     },
     {
         icon:FileAddOutlined,
         label: 'Matricular Alunos',
         path: 'enroll',
-        element: <Enroll /> ?? < ErrorPage />
+        element: <Enroll /> ?? < ErrorPage />,
+        role:['ADMIN, DESK']
     },
     {
         icon:SnippetsOutlined,
         label:'Criar Chamadas',
         path:'lists',
-        element: <List /> ?? < ErrorPage />
+        element: <List /> ?? < ErrorPage />,
+        role:['ADMIN, DESK']
     },
 
 ]
@@ -54,7 +60,7 @@ export const routes = [
 
 export const RoutesReference: React.FC = () =>{
 
-    const {signed} = useAuth();
+    const {signed, userRole} = useAuth();
 
     const ForbiddenAcces:React.FC =()=>{
         return (<Navigate to='/' />)
@@ -67,7 +73,7 @@ export const RoutesReference: React.FC = () =>{
                 <Route path='*' element={<Login />} />
                 <Route path='/login' element={<Login />}/>
                 <Route path='/home' element={signed ? <Home /> : <ForbiddenAcces />}>
-                    {routes.map((_,index) => <Route path={routes[index].path} element={routes[index].element} key={index} />)}
+                    {routes.map((_,index) => _.role.includes(userRole)? <Route path={routes[index].path} element={routes[index].element} key={index} /> : null)}
                 </Route>
             </Routes>
         </BrowserRouter>
