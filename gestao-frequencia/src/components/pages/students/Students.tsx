@@ -38,8 +38,7 @@ export const Students:React.FC = () => {
     e.preventDefault();
 
     await studentData.createStudent(formData.firstName, formData.lastName, formData.email)
-      .then(data => {
-      console.log('Student created:', data);
+      .then(() => {
       notifySuccess("Estudante cadastrado");
       setFormData(initialFormData);
     }).catch(error => {

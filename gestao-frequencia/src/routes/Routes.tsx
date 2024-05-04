@@ -59,7 +59,6 @@ const routes = [
 
 export function filteredRoutes(userRole:string){
     const filtered = routes.filter((e) => e.role.includes(userRole));
-    console.log(filtered);
     return filtered;
 }  
     

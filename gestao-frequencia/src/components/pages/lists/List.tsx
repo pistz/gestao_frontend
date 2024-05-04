@@ -36,8 +36,7 @@ export const List:React.FC = () => {
 
     await listData
       .createAttendanceList(form.getFieldValue('attendanceDate'),form.getFieldValue('courseId'))
-      .then(data => {
-      console.log('List created:', data);
+      .then(() => {
       notifySuccess("Lista de Chamada Cadastrada");
       clearForm();
     })
