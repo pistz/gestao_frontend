@@ -1,4 +1,4 @@
-import React, { useEffect} from "react"
+import React, { useEffect, useState} from "react"
 import logo from '../../../assets/home-logo.png'
 import { buttonsFormStyles, buttonStyles, formStyles, imgStyles, loginDivStyle, loginFormStyles, logoStyles } from "./styles";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
@@ -14,11 +14,13 @@ const validateLogin = new LoginRepository();
 export const Login:React.FC = () =>{
 
     const {setSigned, setUserEmail, setUserSchoolId, setSchoolname} = useAuth();
+    const [isDisabled, setIsDisabled] = useState<boolean>(false);
+
     const navigate = useNavigate();
 
     const onFinish = async (values:ILogin) => {
-
         try {
+            setIsDisabled(true);
             await validateLogin.validateUser(values.email, values.password)
             .then((data)=>{
                     setSigned(true)
@@ -26,13 +28,13 @@ export const Login:React.FC = () =>{
                     sessionStorage.setItem('$', JSON.stringify(data.school['id']));
             })
         } catch (error) {
+            setIsDisabled(false);
             console.error(error)
             notifyError("Usuário ou senha incorretos");
         }
     };
 
     useEffect(()=>{
-
         const findUser = sessionStorage.getItem('$us');
         const findSchool = sessionStorage.getItem('$');
         if(findUser && findSchool){
@@ -99,8 +101,9 @@ export const Login:React.FC = () =>{
                     htmlType="submit" 
                     className="login-form-button" 
                     style={buttonStyles}
+                    disabled={isDisabled}
                 >
-                Entrar
+                {isDisabled? "Carregando" : "Entrar"}
                 </Button>
             </Form.Item>
         </Form>

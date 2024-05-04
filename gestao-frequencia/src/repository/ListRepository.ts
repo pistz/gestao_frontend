@@ -4,9 +4,9 @@ import Repository from "./base/Repository";
 import { IList } from "../entities/List/List";
 import { IListRelation } from "../entities/List/ListRelation";
 
-const list:string = endpoints.host.concat(endpoints.api,endpoints.lists);
-const attend:string = endpoints.host.concat(endpoints.api, endpoints.attend);
-const listRelation:string = endpoints.host.concat(endpoints.api, endpoints.listRelation);
+const list:string = endpoints.host+endpoints.api+endpoints.lists;
+const attend:string = endpoints.host+endpoints.api+endpoints.attend;
+const listRelation:string = endpoints.host+endpoints.api+endpoints.listRelation;
 export class AttendanceList extends Repository{
 
     createAttendanceList = async (attendanceDate:string, courseId:string) =>{

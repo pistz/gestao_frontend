@@ -1,7 +1,6 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import { IMenu } from './types';
-import type { MenuProps } from 'antd';
 import {contentStyle, footerStyle, headerStyle, innerLayoutStyle, menuStyles, outerLayoutStyles, siderStyles} from './styles'
 import { useNavigate } from 'react-router-dom';
 import { Footer, Header } from 'antd/es/layout/layout';
@@ -16,7 +15,7 @@ export const MainLayout:React.FC<IMenu> = ({listItems, children}:IMenu) => {
 
     const {userEmail} = useAuth();
 
-    const menuItems:MenuProps['items'] = listItems?.map((item, index) => ({
+    const menuItems:any = listItems?.map((item:any, index:any) => ({
             key: String(index),
             icon: React.createElement(item?.icon),
             label: `${item?.label}`
@@ -25,7 +24,7 @@ export const MainLayout:React.FC<IMenu> = ({listItems, children}:IMenu) => {
 
     const navigate = useNavigate();
 
-    const handleRedirect = (pages:MenuProps['items'], key:string) =>{
+    const handleRedirect = (pages:any, key:string) =>{
         if(pages){
             const index = Number(key);
             navigate(`${pages[index]?.path}`);
