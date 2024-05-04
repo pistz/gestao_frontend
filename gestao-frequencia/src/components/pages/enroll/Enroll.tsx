@@ -39,8 +39,7 @@ export const Enroll: React.FC = () => {
         e.preventDefault();
     
         await studentData.enrollStudent(form.getFieldValue('studentId'), form.getFieldValue('courseId'))
-            .then((e) => {
-            console.log(e)
+            .then(() => {
             notifySuccess("Estudante matriculado");
             onClose();
         })

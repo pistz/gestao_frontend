@@ -41,8 +41,7 @@ export const Courses:React.FC = () => {
     e.preventDefault();
 
     await courseDataRepository.createCourse(formData.name, formData.startingYear, formData.schoolId)
-      .then(data => {
-      console.log('Course created:', data);
+      .then(() => {
       notifySuccess("matéria cadastrada");
       setFormData(initialFormData);
     }).catch(error => {
