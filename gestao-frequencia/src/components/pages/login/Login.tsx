@@ -13,7 +13,7 @@ const validateLogin = new LoginRepository();
 
 export const Login:React.FC = () =>{
 
-    const {setSigned, setUserEmail, setUserSchoolId, setSchoolname} = useAuth();
+    const {setSigned, setUserEmail, setUserSchoolId, setSchoolname, setUserRole} = useAuth();
     const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
     const navigate = useNavigate();
@@ -45,6 +45,7 @@ export const Login:React.FC = () =>{
                 if(user !== null || user !== undefined){
                     const {id} = user.school;
                     const {schoolName} = user.school;
+                    setUserRole(user.role);
                     setUserEmail(user.email);
                     setUserSchoolId(id);
                     setSchoolname(schoolName);

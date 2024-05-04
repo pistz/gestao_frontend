@@ -11,46 +11,59 @@ import { Students } from '../components/pages/students/Students';
 import { Enroll } from '../components/pages/enroll/Enroll';
 import { Attendance } from '../components/pages/attendance/Attendance';
 
-export const routes = [
+const routes = [
     {
         icon:HomeOutlined,
         label:'Home',
         path:'main',
-        element: <Welcome /> ?? < ErrorPage />
+        element: <Welcome /> ?? < ErrorPage />,
+        role:['ADMIN', 'DESK', 'PROFESSOR']
     },
     {
         icon:ScheduleOutlined,
         label:'Fazer chamada',
         path:'attendance',
-        element: < Attendance /> ?? < ErrorPage />
+        element: < Attendance /> ?? < ErrorPage />,
+        role:['ADMIN', 'PROFESSOR']
     },  
     {
         icon:PartitionOutlined,
         label:'Cadastrar Matéria',
         path:'course',
-        element: <Courses /> ?? < ErrorPage />
+        element: <Courses /> ?? < ErrorPage />,
+        role:['ADMIN', 'DESK']
     },
     {
         icon:UsergroupAddOutlined,
         label:'Cadastrar Alunos',
         path:'students',
-        element: <Students /> ?? < ErrorPage />
+        element: <Students /> ?? < ErrorPage />,
+        role:['ADMIN', 'DESK']
     },
     {
         icon:FileAddOutlined,
         label: 'Matricular Alunos',
         path: 'enroll',
-        element: <Enroll /> ?? < ErrorPage />
+        element: <Enroll /> ?? < ErrorPage />,
+        role:['ADMIN', 'DESK']
     },
     {
         icon:SnippetsOutlined,
         label:'Criar Chamadas',
         path:'lists',
-        element: <List /> ?? < ErrorPage />
+        element: <List /> ?? < ErrorPage />,
+        role:['ADMIN', 'DESK']
     },
 
 ]
 
+export function filteredRoutes(userRole:string){
+    const filtered = routes.filter((e) => e.role.includes(userRole));
+    console.log(filtered);
+    return filtered;
+}  
+    
+    
 
 export const RoutesReference: React.FC = () =>{
 
