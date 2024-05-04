@@ -11,56 +11,63 @@ import { Students } from '../components/pages/students/Students';
 import { Enroll } from '../components/pages/enroll/Enroll';
 import { Attendance } from '../components/pages/attendance/Attendance';
 
-export const routes = [
+const routes = [
     {
         icon:HomeOutlined,
         label:'Home',
         path:'main',
         element: <Welcome /> ?? < ErrorPage />,
-        role:['ADMIN, DESK, PROFESSOR']
+        role:['ADMIN', 'DESK', 'PROFESSOR']
     },
     {
         icon:ScheduleOutlined,
         label:'Fazer chamada',
         path:'attendance',
         element: < Attendance /> ?? < ErrorPage />,
-        role:['ADMIN, PROFESSOR']
+        role:['ADMIN', 'PROFESSOR']
     },  
     {
         icon:PartitionOutlined,
         label:'Cadastrar Matéria',
         path:'course',
         element: <Courses /> ?? < ErrorPage />,
-        role:['ADMIN, DESK']
+        role:['ADMIN', 'DESK']
     },
     {
         icon:UsergroupAddOutlined,
         label:'Cadastrar Alunos',
         path:'students',
         element: <Students /> ?? < ErrorPage />,
-        role:['ADMIN, DESK']
+        role:['ADMIN', 'DESK']
     },
     {
         icon:FileAddOutlined,
         label: 'Matricular Alunos',
         path: 'enroll',
         element: <Enroll /> ?? < ErrorPage />,
-        role:['ADMIN, DESK']
+        role:['ADMIN', 'DESK']
     },
     {
         icon:SnippetsOutlined,
         label:'Criar Chamadas',
         path:'lists',
         element: <List /> ?? < ErrorPage />,
-        role:['ADMIN, DESK']
+        role:['ADMIN', 'DESK']
     },
 
 ]
 
+export function filteredRoutes(userRole:string){
+    const filtered = routes.filter((e) => e.role.includes(userRole));
+    console.log(filtered);
+    return filtered;
+}  
+    
+    
 
 export const RoutesReference: React.FC = () =>{
 
-    const {signed, userRole} = useAuth();
+    const {signed} = useAuth();
 
     const ForbiddenAcces:React.FC =()=>{
         return (<Navigate to='/' />)
@@ -73,7 +80,7 @@ export const RoutesReference: React.FC = () =>{
                 <Route path='*' element={<Login />} />
                 <Route path='/login' element={<Login />}/>
                 <Route path='/home' element={signed ? <Home /> : <ForbiddenAcces />}>
-                    {routes.map((_,index) => _.role.includes(userRole)? <Route path={routes[index].path} element={routes[index].element} key={index} /> : null)}
+                    {routes.map((_,index) => <Route path={routes[index].path} element={routes[index].element} key={index} />)}
                 </Route>
             </Routes>
         </BrowserRouter>
